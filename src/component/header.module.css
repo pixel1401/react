@@ -1,0 +1,13 @@
+.header {
+  grid-area: h;
+  background-color: #68bd68;
+}
+
+.header__logo {
+  height: 50px;
+}
+
+.header__logo img {
+  height: 100%;
+  object-fit: contain;
+}
