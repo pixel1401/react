@@ -1,4 +1,6 @@
 import s from "./profile.module.css"
+import Post from "./post/post"
+
 
 const Profile = () => {
     return (
@@ -22,18 +24,14 @@ const Profile = () => {
             <textarea placeholder="your news..."></textarea>
             <button type="submit">Send</button>
           </form>
-          <div className= {s.content__comment}>
-            <div className= {s.content__comment_item}>
-              <div className= {s.content__comment_img}>
-              </div>
-              <div className= {s.content__comment_text}>Hey,why nobody love me?</div>
-            </div>
-            <div className= {s.content__comment_item}>
-              <div className={s.content__comment_img}>
-              </div>
-              <div className= {s.content__comment_text}>It's our new program! Hey!</div>
-            </div>
-          </div>
+
+            <Post />
+            <Post />
+            <Post />
+
+
+
+
         </div>
       </main>
     )

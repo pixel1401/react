@@ -1,8 +1,8 @@
 // import logo from './logo.svg';
 import './App.css';
-import Header from './component/header';
-import Sidbar from './component/nav';
-import Profile from './component/profile';
+import Header from './component/header/header';
+import Sidbar from './component/nav/nav';
+import Profile from './component/profile/profile';
 
 function App() {
   return (

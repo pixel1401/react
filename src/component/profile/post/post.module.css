@@ -1,0 +1,20 @@
+
+.content__comment {
+  grid-column: 2 span;
+}
+
+.content__comment_item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  font-size: 21px;
+  margin-top: 25px;
+}
+
+.content__comment_img {
+  width: 25px;
+  height: 25px;
+  background-color: #68bd68;
+  border-radius: 50%;
+  margin-right: 50px;
+}
