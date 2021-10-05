@@ -25,9 +25,9 @@ const Profile = () => {
             <button type="submit">Send</button>
           </form>
 
-            <Post />
-            <Post />
-            <Post />
+            <Post name="Egor" age="25"/>
+            <Post  name="Era" height="height: 180"/>
+            <Post  name="Pride" color="red"/>
 
 
 
