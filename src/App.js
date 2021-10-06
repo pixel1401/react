@@ -1,16 +1,26 @@
 // import logo from './logo.svg';
+import { BrowserRouter, Route } from 'react-router-dom';
 import './App.css';
+import Dialog from './component/dialog/Dialog';
 import Header from './component/header/header';
 import Sidbar from './component/nav/nav';
 import Profile from './component/profile/profile';
 
 function App() {
   return (
-    <div className="wrapper">
-      <Header/>
-      <Sidbar/>
-      <Profile/>
-    </div>
+    <BrowserRouter>
+      <div className="wrapper">
+        <Header/>
+        <Sidbar/>
+        
+        <div className="app-wrapper-window">
+        <Route path="/profile" component={Profile} />
+        <Route path="/dialog" component={Dialog} />
+          {/* <Dialog/> */}
+        </div>
+        {/* <Profile/> */}
+      </div>
+    </BrowserRouter>
   );
 }
 
