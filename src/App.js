@@ -14,11 +14,9 @@ function App() {
         <Sidbar/>
         
         <div className="app-wrapper-window">
-        <Route path="/profile" component={Profile} />
-        <Route path="/dialog" component={Dialog} />
-          {/* <Dialog/> */}
+          <Route path="/profile" component={Profile} />
+          <Route path="/dialog" component={Dialog} />
         </div>
-        {/* <Profile/> */}
       </div>
     </BrowserRouter>
   );

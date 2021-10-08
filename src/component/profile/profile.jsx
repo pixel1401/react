@@ -13,8 +13,8 @@ const Profile = () => {
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-HXBNEcPO8DOwEs0Zx7owwqcGvkv_s-9TJA&usqp=CAU" alt="img"></img>
           </div>
           <div className={s.content__profile_info}>
-            <h3 className={`{s.content__profile_info}  {s.content__profile_name}`} >Erzhan S.N</h3>
-            <div className= {`{s.content__profile_info}  {s.content__profile_born}`}>Date of Birth: 1 April </div>
+            <h3 className={`${s.content__profile_info}  ${s.content__profile_name}`} >First S.N</h3>
+            <div className= {`${s.content__profile_info} , ${s.content__profile_born}`}>Date of Birth: 1 April </div>
             <div className= {`{s.content__profile_info}  {s.content__profile_city}`} >City: Aktobe</div>
             <div className= {`{s.content__profile_info}  {s.content__profile_education}`}>BSU' 66</div>
             <div className= {`{s.content__profile_info}  {s.content__profile_site}`}>Web sity:https://fugicar1.ru</div>

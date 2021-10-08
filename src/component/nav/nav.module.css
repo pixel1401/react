@@ -5,4 +5,11 @@
   flex-direction: column;
   padding: 30px 15px 0 35px;
   font-size: 30px;
+
+}
+.nav__link {
+  color: blue;
+}
+.nav__link.active {
+  color: red ;
 }

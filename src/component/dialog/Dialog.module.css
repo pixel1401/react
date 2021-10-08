@@ -1,4 +1,116 @@
 .dialog {
-  color: red;
-  font-size: 25px;
+  display: grid;
+  grid-template-columns: 2fr 8fr;
 }
+
+.dialog__title {
+  grid-column: 2 span;
+  margin-bottom: 25px;
+}
+
+.dialog__contact {
+  border-right: 2px solid grey;
+}
+
+.dialog__contact_item {
+  display: flex;
+  align-items: center;
+  transition: all 0.3s;
+}
+
+.dialog__contact_item:not(:first-child) {
+  margin-top: 25px;
+}
+
+.dialog__contact_point {
+  width: 9px;
+  height: 9px;
+  background-color: gray;
+  border-radius: 50%;
+  margin-right: 8px;
+  transition: all 0.3s;
+}
+
+.dialog__contact_name {
+  font-size: 20px;
+  transition: all 0.3s;
+  color: grey;
+}
+
+.dialog__contact_name:hover {
+  font-size: 30px;
+  color: black;
+}
+
+.dialog__window {
+  margin-left: 65px;
+}
+
+.dialog__window_item {
+  display: flex;
+  align-items: center;
+}
+
+.dialog__window_item:not(:first-child) {
+  margin-top: 25px;
+}
+
+.dialog__window_icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dialog__window_img {
+  width: 60px;
+  height: 60px;
+  background-color: gray;
+  border-radius: 50%;
+  margin-bottom: 2px;
+}
+
+.dialog__window_name {
+  color: gray;
+  font-size: 19px;
+}
+
+.dialog__window_text {
+  position: relative;
+  margin-left: 80px;
+  font-size: 20px;
+  height: 100%;
+  width: 250px;
+  padding: 9px 20px;
+  border: 2px solid rgba(128, 128, 128, 0.5);
+  border-radius: 15px;
+}
+
+.dialog__window_text::after {
+  content: "";
+  position: absolute;
+  left: -18px;
+  top: 6px;
+  width: 25px;
+  height: 25px;
+  border: solid rgba(128, 128, 128, 0.5);
+  border-width: 3px 0px 0px 3px;
+  display: block;
+  border-bottom-right-radius: 5px;
+  transform: skew(-14deg, 14deg) rotate(-59deg);
+}
+
+.dialog__window_mine {
+  flex-direction: row-reverse;
+}
+
+.dialog__window_mine .dialog__window_text {
+  margin-right: 80px;
+  margin-left: 0;
+}
+
+.dialog__window_mine .dialog__window_text::after {
+  left: auto;
+  right: -18px;
+  transform: skew(-14deg, 14deg) rotate(118deg);
+}
+/*# sourceMappingURL=Dialog.module.css.map */

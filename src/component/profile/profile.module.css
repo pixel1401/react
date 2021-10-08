@@ -1,8 +1,8 @@
 
-.content {
+/* .content {
   grid-area: c;
   height: 100%;
-}
+} */
 
 .content__img {
   width: 100%;
@@ -36,6 +36,10 @@
 .content__profile_info {
   grid-column: 2/3;
   font-size: 30px;
+}
+
+.content__profile_name {
+  color: red;
 }
 
 .content__post {

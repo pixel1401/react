@@ -1,0 +1,103 @@
+.dialog {
+    display: grid;
+    grid-template-columns: 2fr 8fr;
+    &__title {
+        grid-column: 2 span;
+        margin-bottom: 25px;
+    }
+    &__contact {
+        border-right: 2px solid grey;
+
+        &_item {
+            display: flex;
+            align-items: center;
+            transition: all 0.3s;
+                &:not(:first-child) {
+                    margin-top: 25px;
+                }            
+        }
+        &_point {
+            width: 9px;height: 9px;
+            background-color: gray;
+            border-radius: 50%;
+            margin-right: 8px;
+            transition: all 0.3s;
+        }
+        &_name {
+            font-size: 20px;
+            transition: all 0.3s;
+            color: grey;
+                &:hover {
+                    font-size: 30px;
+                    color: black;
+                }
+        }
+    }
+    &__window {
+        margin-left: 65px;
+        
+        &_item {
+            display: flex;
+            align-items: center;
+                &:not(:first-child) {
+                    margin-top: 25px;
+                }
+        }
+        &_icon{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        &_img{
+            width: 60px;height: 60px;
+            background-color: gray;
+            border-radius: 50%;
+            margin-bottom: 2px;
+        }
+
+        &_name {
+            color: gray;
+            font-size: 19px;
+        }
+
+        &_text{
+            position: relative;
+            margin-left: 80px;
+            font-size: 20px;
+            height: 100%;
+            width: 250px;
+            padding: 9px 20px;
+            border: 2px solid rgba(grey , 0.5);
+            border-radius: 15px;
+                &::after {
+                    content: "";
+                    position: absolute;
+                    left: -18px;
+                    top: 6px;
+                    width: 25px;
+                    height: 25px;
+                    border: solid rgba(grey , 0.5);
+                    border-width: 3px 0px 0px 3px;
+                    // display: inline-block;
+                    display: block;
+                    // padding: 14px;
+                    border-bottom-right-radius: 5px;
+                    // transform: rotate(-49deg);
+                    transform: skew(-14deg, 14deg) rotate(-59deg);
+                }
+        }
+        &_mine{
+            flex-direction: row-reverse;
+                & .dialog__window_text {
+                    margin-right: 80px;
+                    margin-left: 0;
+                        &::after {
+                            left: auto;
+                            right: -18px;          
+                            transform: skew(-14deg, 14deg) rotate(118deg);                  
+                        }
+                }
+        }
+        &_aline{}
+    }
+}
