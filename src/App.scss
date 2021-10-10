@@ -57,6 +57,38 @@ $color-text:gray;
 
 }
 
+
+
+.heart {
+  background-color: red;
+  display: inline-block;
+  height: 15px;
+  margin: 0 10px;
+  position: relative;
+  top: 0;
+  transform: rotate(-42deg);
+  width: 15px;
+}
+
+.heart:before,
+.heart:after {
+  content: "";
+  background-color: red;
+  border-radius: 50%;
+  height: 15px;
+  position: absolute;
+  width: 15px;
+}
+
+.heart:before {
+  top: -6.5px;
+  left: 0;
+}
+
+.heart:after {
+  left: 6.5px;
+  top: 0;
+}
 // /* HEADER */
 // .header {
 //     grid-area: h;

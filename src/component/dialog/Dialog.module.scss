@@ -27,7 +27,9 @@
             font-size: 20px;
             transition: all 0.3s;
             color: grey;
-                &:hover {
+            white-space:nowrap;
+            margin-right: 5px;
+            &:hover {
                     font-size: 30px;
                     color: black;
                 }
@@ -72,18 +74,21 @@
                 &::after {
                     content: "";
                     position: absolute;
-                    left: -18px;
-                    top: 6px;
+                    left: -14px;
+                    top: 9px;
                     width: 25px;
                     height: 25px;
                     border: solid rgba(grey , 0.5);
-                    border-width: 3px 0px 0px 3px;
+                    border-width: 2px 0px 0px 2px;
                     // display: inline-block;
                     display: block;
                     // padding: 14px;
-                    border-bottom-right-radius: 5px;
+                    border-top-left-radius: 5px;
                     // transform: rotate(-49deg);
                     transform: skew(-14deg, 14deg) rotate(-59deg);
+
+
+                    
                 }
         }
         &_mine{
@@ -93,8 +98,8 @@
                     margin-left: 0;
                         &::after {
                             left: auto;
-                            right: -18px;          
-                            transform: skew(-14deg, 14deg) rotate(118deg);                  
+                            right: -14px;          
+                            transform: skew(-14deg, 14deg) rotate(120deg);                  
                         }
                 }
         }

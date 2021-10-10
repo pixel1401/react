@@ -35,6 +35,8 @@
   font-size: 20px;
   transition: all 0.3s;
   color: grey;
+  white-space: nowrap;
+  margin-right: 5px;
 }
 
 .dialog__contact_name:hover {
@@ -88,14 +90,14 @@
 .dialog__window_text::after {
   content: "";
   position: absolute;
-  left: -18px;
-  top: 6px;
+  left: -14px;
+  top: 9px;
   width: 25px;
   height: 25px;
   border: solid rgba(128, 128, 128, 0.5);
-  border-width: 3px 0px 0px 3px;
+  border-width: 2px 0px 0px 2px;
   display: block;
-  border-bottom-right-radius: 5px;
+  border-top-left-radius: 5px;
   transform: skew(-14deg, 14deg) rotate(-59deg);
 }
 
@@ -110,7 +112,7 @@
 
 .dialog__window_mine .dialog__window_text::after {
   left: auto;
-  right: -18px;
-  transform: skew(-14deg, 14deg) rotate(118deg);
+  right: -14px;
+  transform: skew(-14deg, 14deg) rotate(120deg);
 }
 /*# sourceMappingURL=Dialog.module.css.map */
