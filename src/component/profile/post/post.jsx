@@ -7,9 +7,10 @@ const Post = (props) => {
                 <div className={s.content__comment_ava}>
                     <div className= {s.content__comment_img}>
                     </div>
-                    <div className={s.content__comment_like}><span className="heart"></span> <span className="count">{props.likeCount}</span></div>
+                    <div className={s.content__comment_name}>{props.name}</div>
                 </div>
-              <div className= {s.content__comment_text}>{props.name}  {props.age}  {props.color}  {props.height}</div>
+                <div className= {s.content__comment_text}>{props.text}</div>
+                <div className={s.content__comment_like}><span className="heart"></span> <span className="count">{props.likeCount}</span></div>
             </div>
 
         </div>

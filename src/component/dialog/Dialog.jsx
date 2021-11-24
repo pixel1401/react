@@ -1,57 +1,48 @@
-import { NavLink } from "react-router-dom";
+// import { NavLink } from "react-router-dom";
 import s from "./Dialog.module.css";
+import DialogItem from "./dialogsName/dilogsName";
+import DialogWindow from "./messeges/messeges"
+// DATAbASE
+let dialogs = [
+            {id:1,name:"Andrew"},
+            {id:2,name:"Era"},
+            {id:3,name:"Oleg"},
+            {id:4,name:"Dina"},
+            {id:5,name:"Victor"}
+]
 
-
-const DialogItem = (props) => {
-    return (
-        <NavLink to={`/dialog/${props.id}`}  className={s.dialog__contact_item}>
-            <span className={s.dialog__contact_point}></span>
-            <div className={s.dialog__contact_name}>{props.name}</div>
-        </NavLink>
-    )
-}
-
-
-const DialogWindow = (props)=> {
-    let who = s["dialog__window_" + props.who];
-
-    return (
-        <div className={`${s.dialog__window_item} ${who}`}>
-                <div className={s.dialog__window_icon}>
-                        <div className={s.dialog__window_img}>
-                        </div>    
-                <div className={s.dialog__window_name}>{props.name}</div>    
-            </div>
-            <div className={s.dialog__window_text}>{props.text}</div>                       
-        </div>
-    )
-}
+let messeges = [
+    {who:"mine" , name:"Me" , text:"My name is Erzhan"},
+    {who:"aline" , name:"Victor" , text:"My name is victor awd a"},
+    {who:"aline" , name:"Victor" , text:"My name is victor awd awd"},
+    {who:"mine" , name:"Me" , text:"I am a  popover and I can have text and everything Erzhan awdawda "},
+    {who:"aline" , name:"Victor" , text:"I am a normal popover awdad wad awd awd"},
+]
+// END DATABASE
 
 
 
+
+// SEND HTML
 const Dialog = (props) => {
+        
+        let dialosgElem = dialogs.map((name ,i)=>  <DialogItem key ={i}  id={name.id} name={name.name}/>)
+
+        let massegElem = messeges.map((m , i)=>  <DialogWindow  key={i} who={m.who} name={m.name} text = {m.text}/> )
+
     return (
         <div className = {s.dialog}>
                 <div className={`title ${s.dialog__title}`}>Dialog</div>
                 <div className={s.dialog__contact}>
-                    <DialogItem name="Andrew Class" id="1"/>
-                    <DialogItem name="Dmitry" id="2"/>
-                    <DialogItem name="Sasha" id="3"/>
-                    <DialogItem name="Sveta" id="4"/>
-                    <DialogItem name="Valera" id="5"/>
-                    <DialogItem name="Victor" id="6"/>
-                    
+                    {dialosgElem}
                 </div>
 
                 <div className={s.dialog__window}>
-                    <DialogWindow who="mine" name="Me" text="I am a normal popover and I can have text and everything Erzhan"/>
-                    <DialogWindow who="aline" name="Victor" text="I am a  popover and I can have text and everything Erzhan"/>
-                    <DialogWindow who="aline" name="Victor" text="I am a  popover and I can have text and everything Erzhan"/>
-                    <DialogWindow who="mine" name="Me" text="I am a normal popover "/>
-                    <DialogWindow who="mine" name="Me" text="I am a normal popover awdad wad awd awd"/>
+                    {massegElem}
                 </div>
         </div>
     )
 }
+
 
 export default Dialog;

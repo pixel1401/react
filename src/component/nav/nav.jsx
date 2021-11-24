@@ -9,6 +9,7 @@ const Sidbar = () => {
             <NavLink to="/news" className={s.nav__link} activeClassName={s.active}>News</NavLink>
             <NavLink to="/music" className={s.nav__link} activeClassName={s.active} >Music</NavLink>
             <NavLink to="/setting" className={s.nav__link} activeClassName={s.active}>Settings</NavLink>
+            <NavLink to="/works" className={s.nav__link}  activeClassName={s.active} >Works</NavLink>
         </nav>
     )
 };

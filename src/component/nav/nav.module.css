@@ -13,3 +13,7 @@
 .nav__link.active {
   color: red ;
 }
+
+.nav__work {
+  color: red;
+}
