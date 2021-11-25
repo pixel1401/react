@@ -4,10 +4,13 @@ import './App.css';
 import Dialog from './component/dialog/Dialog';
 import Header from './component/header/header';
 import Sidbar from './component/nav/nav';
-import Profile from './component/profile/profile';
 import Works from './component/work/work';
+import Profile from "./component/profile/profile.jsx";
+import postsBase from './index';
 
-function App() {
+
+
+function App(props) {
   return (
     <BrowserRouter>
       <div className="wrapper">
@@ -15,9 +18,9 @@ function App() {
         <Sidbar/>
         
         <div className="app-wrapper-window">
-          <Route path="/profile" component={Profile} />
-          <Route path="/dialog" component={Dialog} />
-          <Route path="/works" component={Works}/> 
+          <Route path="/profile" render={() => <Profile posts={props.posts}/>} />
+          <Route path="/dialog" render={() => <Dialog dialogs={props.dialogs} messeges={props.messeges}/>} />
+          <Route path="/works" render={() => <Works works={props.works}/>}/> 
         </div>
       </div>
     </BrowserRouter>
