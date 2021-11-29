@@ -1,6 +1,19 @@
+import React from "react";
 import s from "../profile.module.css";
 
-const profileInfo = (props)=> {
+
+    
+    const profileInfo = (props)=> {
+        const newPost = React.createRef();
+        let showText = (e)=> {
+            props.addPost()
+        }
+
+        const postChange = (e)=> {
+            props.updateNewTextPost(newPost.current.value)
+        }
+
+
     return (
         <div className={s.content__profile}>
             <div className={s.content__img}>
@@ -16,11 +29,11 @@ const profileInfo = (props)=> {
                 <div className={`${s.content__profile_info}  ${s.content__profile_education}`}>BSU' 66</div>
                 <div className={`${s.content__profile_info}  ${s.content__profile_site}`}>Web sity:https://fugicar1.ru</div>
             </div>
-            <form className={s.content__post}>
+            <div className={s.content__post}>
                 <h3 className={s.content__post_title}>My post</h3>
-                <textarea placeholder="your news..."></textarea>
-                <button type="submit">Send</button>
-            </form>
+                <textarea ref={newPost} onChange={postChange} value={props.newText}  placeholder="your post" ></textarea>
+                <button onClick={showText} type="submit">Send</button>
+            </div>  
         </div>
     )
 }

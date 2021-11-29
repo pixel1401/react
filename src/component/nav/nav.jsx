@@ -1,7 +1,8 @@
 import { NavLink } from "react-router-dom";
+import FriendsLink from "./friends-link/firends-link.jsx";
 import s from "./nav.module.css"
 
-const Sidbar = () => {
+const Sidbar = (props) => {
     return (
         <nav className={s.nav} >
             <NavLink to="/profile" activeClassName={s.active} className={s.nav__link}>Profile</NavLink>
@@ -10,6 +11,8 @@ const Sidbar = () => {
             <NavLink to="/music" className={s.nav__link} activeClassName={s.active} >Music</NavLink>
             <NavLink to="/setting" className={s.nav__link} activeClassName={s.active}>Settings</NavLink>
             <NavLink to="/works" className={s.nav__link} activeClassName={s.active} >Works</NavLink>
+            
+            <FriendsLink base={props.base}/>
         </nav>
     )
 };

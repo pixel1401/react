@@ -5,9 +5,8 @@ import s from "./works.module.css";
 
 
 
-
 const Works = (props) => {
-    let itemCart = props.works.map((e, i) => <WorksItem key={i} img={e.img} name={e.name} text={e.text} />);
+    let itemCart = props.base.baseWork.map((e, i) => <WorksItem key={i} img={e.img} name={e.name} text={e.text} />);
     return (
         <section className={s.works}>
             <h2 className={s.works__title}>Works</h2>

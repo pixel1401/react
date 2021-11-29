@@ -10,11 +10,15 @@ import ProfileInfo from "./profile-info/profile-info"
 
 const Profile = (props) => {
 
-  let postElem = props.posts.map((p,i)=> <Post key={i} name={p.name} likeCount={p.likeCount} text={p.text} />)
+  let postElem = props.base.postsBase.map((p,i)=> <Post key={i} name={p.name} likeCount={p.likeCount} text={p.text} />)
   
     return (
       <main className={s.content}>
-            <ProfileInfo/>
+            <ProfileInfo 
+            addPost={props.addPost}
+            newText={props.newText}
+            updateNewTextPost={props.updateNewTextPost}
+            />
             {postElem}
       </main>
     )
