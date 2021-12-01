@@ -1,24 +1,26 @@
-import redux, { subscribe } from "./redux/redux";
+import store from "./redux/redux";
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { addPost, updateNewTextPost } from './redux/redux';
 
-export const renderDom = (redux )=> ReactDOM.render(
+
+export const renderDom = (state )=> ReactDOM.render(
   <React.StrictMode>
-    <App redux={redux} addPost={addPost} updateNewTextPost={updateNewTextPost} />
+    <App state={state} 
+      dispatch={store.dispatch.bind(store)}
+    />
   </React.StrictMode>
   ,
   document.getElementById('root')
 );
 
 
-renderDom(redux);
+renderDom(store.getState());
 
 
-subscribe(renderDom);
+store.subscribe(renderDom);
 
 
 

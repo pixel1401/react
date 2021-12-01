@@ -15,9 +15,8 @@ const Profile = (props) => {
     return (
       <main className={s.content}>
             <ProfileInfo 
-            addPost={props.addPost}
-            newText={props.newText}
-            updateNewTextPost={props.updateNewTextPost}
+              dispatch={props.dispatch}
+              newText={props.base.newText}
             />
             {postElem}
       </main>

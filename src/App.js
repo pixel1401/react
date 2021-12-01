@@ -13,17 +13,15 @@ function App(props) {
     <BrowserRouter>
       <div className="wrapper">
         <Header/>
-        <Sidbar base={props.redux.friends.friendsLink}/>
+        <Sidbar base={props.state.friends.friendsLink}/>
         
         <div className="app-wrapper-window">
           <Route path="/profile" render={() => <Profile 
-            base={props.redux.profileComponent}
-            addPost={props.addPost}
-            newText ={props.redux.profileComponent.newText}
-            updateNewTextPost ={props.updateNewTextPost}
+            base={props.state.profileComponent}
+            dispatch={props.dispatch}
           />} />
-          <Route path="/dialog" render={() => <Dialog base={props.redux.dialogComponent} />} />
-          <Route path="/works" render={() => <Works base={props.redux.workComponent}/>}/> 
+          <Route path="/dialog" render={() => <Dialog base={props.state.dialogComponent} />} />
+          <Route path="/works" render={() => <Works base={props.state.workComponent}/>}/> 
         </div>
       </div>
     </BrowserRouter>

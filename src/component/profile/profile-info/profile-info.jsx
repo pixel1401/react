@@ -6,11 +6,11 @@ import s from "../profile.module.css";
     const profileInfo = (props)=> {
         const newPost = React.createRef();
         let showText = (e)=> {
-            props.addPost()
+            props.dispatch({type:"add-post"})
         }
 
         const postChange = (e)=> {
-            props.updateNewTextPost(newPost.current.value)
+            props.dispatch({ type: "updateNewTextPost", newText: newPost.current.value})
         }
 
 
