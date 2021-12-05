@@ -20,7 +20,12 @@ function App(props) {
             base={props.state.profileComponent}
             dispatch={props.dispatch}
           />} />
-          <Route path="/dialog" render={() => <Dialog base={props.state.dialogComponent} />} />
+          
+          <Route path="/dialog" render={() => <Dialog 
+            base={props.state.dialogComponent} 
+            dispatch={props.dispatch}
+          />} />
+          
           <Route path="/works" render={() => <Works base={props.state.workComponent}/>}/> 
         </div>
       </div>

@@ -1,5 +1,7 @@
 import s from "./../Dialog.module.css";
 
+
+
 const DialogWindow = (props)=> {
     let who = s["dialog__window_" + props.who];
 

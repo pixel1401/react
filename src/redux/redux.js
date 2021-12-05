@@ -10,13 +10,15 @@ const store = {
                 {id:4,name:"Dina"},
                 {id:5,name:"Victor"}
             ],
-            messeges : [
+            messages : [
                 {who:"mine" , name:"Me" , text:"My name is Erzhan"},
                 {who:"aline" , name:"Victor" , text:"My name is victor awd a"},
                 {who:"aline" , name:"Victor" , text:"My name is victor awd awd"},
                 {who:"mine" , name:"Me" , text:"I am a  popover and I can have text and everything Erzhan awdawda "},
                 {who:"aline" , name:"Victor" , text:"I am a normal popover awdad wad awd awd"},
-            ]
+            ],
+
+            change_text:""
         },
 
         workComponent:{
@@ -78,43 +80,57 @@ const store = {
     },
 
 
-    // addPost() {
-    //     let newPostt = {
-    //         name:"Function",
-    //         likeCount:0,
-    //         text:this._state.profileComponent.newText,
-    //     };
-
-    //     this._state.profileComponent.postsBase.push(newPostt);
-    //     this._state.profileComponent.newText = "";
-    //     this.renderDom(this._state )
-    // },
-
-    // updateNewTextPost(text) {
-        
-    // },
-
     subscribe(observer) {
         this.renderDom = observer;
     },
 
     dispatch(action){
-        if(action.type === "add-post"){
-            let newPostt = {
+        if(action.type === ADD_POST){
+            let newPost = {
                 name:"Function",
                 likeCount:0,
                 text:this._state.profileComponent.newText,
             };
 
-            this._state.profileComponent.postsBase.push(newPostt);
+            this._state.profileComponent.postsBase.push(newPost);
             this._state.profileComponent.newText = "";
             this.renderDom(this._state )
-        }else if (action.type === "updateNewTextPost") {
-            this._state.profileComponent.newText = action.newText;
+        }else if (action.type === UPDATE_NEW_TEXT_POST) {
+            this._state.profileComponent.newText = action.text;
+            this.renderDom(this._state);
+        }else if (action.type === PRINT_MESSAGES) {
+            this._state.dialogComponent.change_text = action.text;
+            this.renderDom(this._state);
+        }else if (action.type === ADD_MESSAGES) {
+            let newMessage = {
+                who:"mine",
+                name:"Me",
+                text:this._state.dialogComponent.change_text
+            };
+
+            this._state.dialogComponent.messages.push(newMessage);
+            this._state.dialogComponent.change_text = "";
             this.renderDom(this._state);
         }
     }
 };
+
+
+const ADD_POST = "add-post"
+const UPDATE_NEW_TEXT_POST = "updateNewTextPost";
+const PRINT_MESSAGES = "messages";
+const ADD_MESSAGES = "add-messages"
+
+// PROFILE COMPONENT
+export const addPostActionCreator = ()=> ({type:ADD_POST});
+
+export const updateText = (text) => ({ type:UPDATE_NEW_TEXT_POST , text:text});
+
+
+// MESSAGES COMPONENT DIALOG
+export const printMessages = (text)=> ({type:PRINT_MESSAGES, text:text});
+
+export const addMessages = ()=> ({type:ADD_MESSAGES});
 
 
 

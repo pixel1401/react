@@ -8,6 +8,8 @@ import ProfileInfo from "./profile-info/profile-info"
 
 
 
+
+
 const Profile = (props) => {
 
   let postElem = props.base.postsBase.map((p,i)=> <Post key={i} name={p.name} likeCount={p.likeCount} text={p.text} />)
