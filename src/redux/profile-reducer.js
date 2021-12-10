@@ -8,7 +8,17 @@ export const addPostActionCreator = ()=> ({type:ADD_POST});
 export const updateText = (text) => ({ type:UPDATE_NEW_TEXT_POST , text:text});
 
 
-const profileReducer = (state , action)=> {
+let defaultStore = {
+    postsBase :[
+                {name:"Egor" ,likeCount:"25" , text:"Lorem Ipsum is simply dummy text of the printing and typesetting industry."},
+                {name:"Ana" ,likeCount:"25K" , text:"It is a long established fact that a reader will be distracted by the readable content o"},
+                {name:"Kill" ,likeCount:"0" , text:"It is fine"},
+            ],
+            newText:""
+}
+
+
+const profileReducer = (state = defaultStore , action)=> {
 
     switch(action.type) {
         case ADD_POST:

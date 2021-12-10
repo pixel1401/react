@@ -1,4 +1,4 @@
-import store from "./redux/store";
+import store from "./redux/store-redux";
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
@@ -20,7 +20,9 @@ export const renderDom = (state )=> ReactDOM.render(
 renderDom(store.getState());
 
 
-store.subscribe(renderDom);
+store.subscribe(()=> {
+  renderDom(store.getState())
+});
 
 
 
