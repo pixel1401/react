@@ -1,6 +1,6 @@
 // import { NavLink } from "react-router-dom";
 import React from "react";
-import { addMessages, printMessages } from "../../redux/redux";
+import { addMessages, printMessages } from "../../redux/message-reducer";
 import s from "./Dialog.module.css";
 import DialogItem from "./dialogsName/dilogsName";
 import DialogWindow from "./messeges/messeges"

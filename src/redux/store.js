@@ -1,3 +1,5 @@
+import messageReducer from "./message-reducer";
+import profileReducer from "./profile-reducer";
 
 const store = {
 
@@ -47,6 +49,26 @@ const store = {
             Why do we use it?
             It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).`
                 },
+                {
+                    img:"https://shrm-res.cloudinary.com/image/upload/c_crop,h_408,w_724,x_0,y_75/w_auto:100,w_1200,q_35,f_auto/v1/Benefits/office_space_kj3wup.jpg",
+                    name:"Backend Developer",
+                    text:"ext ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+                },
+                {
+                    img:"https://shrm-res.cloudinary.com/image/upload/c_crop,h_408,w_724,x_0,y_75/w_auto:100,w_1200,q_35,f_auto/v1/Benefits/office_space_kj3wup.jpg",
+                    name:"Backend Developer",
+                    text:"ext ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+                },
+                {
+                    img:"https://shrm-res.cloudinary.com/image/upload/c_crop,h_408,w_724,x_0,y_75/w_auto:100,w_1200,q_35,f_auto/v1/Benefits/office_space_kj3wup.jpg",
+                    name:"Backend Developer",
+                    text:"ext ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+                },
+                {
+                    img:"https://shrm-res.cloudinary.com/image/upload/c_crop,h_408,w_724,x_0,y_75/w_auto:100,w_1200,q_35,f_auto/v1/Benefits/office_space_kj3wup.jpg",
+                    name:"Backend Developer",
+                    text:"ext ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+                }
             ]
         },
 
@@ -67,7 +89,9 @@ const store = {
                 {id:4,name:"Dina"},
                 {id:5,name:"Victor"}
             ]
-        }
+        },
+
+       
 
     },
 
@@ -85,52 +109,15 @@ const store = {
     },
 
     dispatch(action){
-        if(action.type === ADD_POST){
-            let newPost = {
-                name:"Function",
-                likeCount:0,
-                text:this._state.profileComponent.newText,
-            };
 
-            this._state.profileComponent.postsBase.push(newPost);
-            this._state.profileComponent.newText = "";
-            this.renderDom(this._state )
-        }else if (action.type === UPDATE_NEW_TEXT_POST) {
-            this._state.profileComponent.newText = action.text;
-            this.renderDom(this._state);
-        }else if (action.type === PRINT_MESSAGES) {
-            this._state.dialogComponent.change_text = action.text;
-            this.renderDom(this._state);
-        }else if (action.type === ADD_MESSAGES) {
-            let newMessage = {
-                who:"mine",
-                name:"Me",
-                text:this._state.dialogComponent.change_text
-            };
+        this._state.profileComponent = profileReducer(this._state.profileComponent , action);
+        this._state.dialogComponent = messageReducer(this._state.dialogComponent , action);
 
-            this._state.dialogComponent.messages.push(newMessage);
-            this._state.dialogComponent.change_text = "";
-            this.renderDom(this._state);
-        }
+        this.renderDom(this._state);
+
     }
 };
 
-
-const ADD_POST = "add-post"
-const UPDATE_NEW_TEXT_POST = "updateNewTextPost";
-const PRINT_MESSAGES = "messages";
-const ADD_MESSAGES = "add-messages"
-
-// PROFILE COMPONENT
-export const addPostActionCreator = ()=> ({type:ADD_POST});
-
-export const updateText = (text) => ({ type:UPDATE_NEW_TEXT_POST , text:text});
-
-
-// MESSAGES COMPONENT DIALOG
-export const printMessages = (text)=> ({type:PRINT_MESSAGES, text:text});
-
-export const addMessages = ()=> ({type:ADD_MESSAGES});
 
 
 
