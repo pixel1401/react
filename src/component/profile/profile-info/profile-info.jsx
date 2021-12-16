@@ -1,18 +1,15 @@
 import React from "react";
-import { addPostActionCreator, updateText } from "../../../redux/profile-reducer";
 import s from "../profile.module.css";
 
 
     const profileInfo = (props)=> {
         const newPost = React.createRef();
         let showText = (e)=> {
-            props.dispatch(addPostActionCreator())
+            props.addPostActionCreator()
         }
-
         const postChange = (e)=> {
             let text = newPost.current.value;
-            let action  = updateText(text);
-            props.dispatch(action);
+            props.updateText(text);
         }
 
 

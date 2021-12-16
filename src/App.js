@@ -1,12 +1,12 @@
 // import logo from './logo.svg';
 import { Route } from "react-router";
 import './App.css';
-import Dialog from './component/dialog/Dialog';
 import Header from './component/header/header';
 import Sidbar from './component/nav/nav';
 import Works from './component/work/work';
 import Profile from "./component/profile/profile.jsx";
 import { BrowserRouter } from 'react-router-dom';
+import DialogContainer from "./component/dialog/Dialog-container";
 
 function App(props) {
   return (
@@ -17,13 +17,11 @@ function App(props) {
         
         <div className="app-wrapper-window">
           <Route path="/profile" render={() => <Profile 
-            base={props.state.profileComponent}
-            dispatch={props.dispatch}
+            store={props.store}
           />} />
           
-          <Route path="/dialog" render={() => <Dialog 
-            base={props.state.dialogComponent} 
-            dispatch={props.dispatch}
+          <Route path="/dialog" render={() => <DialogContainer
+            store={props.store} 
           />} />
           
           <Route path="/works" render={() => <Works base={props.state.workComponent}/>}/> 

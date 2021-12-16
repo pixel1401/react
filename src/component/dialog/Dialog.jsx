@@ -1,6 +1,5 @@
 // import { NavLink } from "react-router-dom";
 import React from "react";
-import { addMessages, printMessages } from "../../redux/message-reducer";
 import s from "./Dialog.module.css";
 import DialogItem from "./dialogsName/dilogsName";
 import DialogWindow from "./messeges/messeges"
@@ -14,17 +13,17 @@ const Dialog = (props) => {
 
     let changeText = ()=> {
         let printText = text.current.value;
-        props.dispatch(printMessages(printText));
+        props.printMessages(printText);
     }
 
     let send = () => {
-        props.dispatch(addMessages());
+        props.addMessages();
     }
 
 
-    let dialosgElem = props.base.dialogs.map((name, i) => <DialogItem key={i} id={name.id} name={name.name} />)
+    let dialosgElem = props.dialogs.map((name, i) => <DialogItem key={i} id={name.id} name={name.name} />)
 
-    let massegElem = props.base.messages.map((m, i) => <DialogWindow key={i} who={m.who} name={m.name} text={m.text} />)
+    let massegElem = props.messages.map((m, i) => <DialogWindow key={i} who={m.who} name={m.name} text={m.text} />)
 
     return (
         <div className={s.dialog}>
@@ -36,7 +35,7 @@ const Dialog = (props) => {
             <div className={s.dialog__window}>
                 {massegElem}
                 <from className={s.dialog__texterea}>
-                    <textarea ref={text} onChange={changeText} value={props.base.change_text} placeholder="print your messages"></textarea>
+                    <textarea ref={text} onChange={changeText} value={props.change_text} placeholder="print your messages"></textarea>
                     <button type="submit" onClick={send} aria-label="send">Send</button>
                 </from>
             </div>
