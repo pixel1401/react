@@ -3,7 +3,10 @@ import { NavLink } from "react-router-dom";
 
 
 const friendsLink = (props)=> {
-    let itemLink = props.base.map((e,i)=> {
+    let state = props.store.getState().friends.friendsLink;
+
+
+    let itemLink = state.map((e,i)=> {
         return (
             <NavLink to={`/friends/${e.id}`} className={s.nav__friends_item} activeClassName={s.active}>
                 <div className={s.nav__friends_ava}></div>

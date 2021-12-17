@@ -12,19 +12,20 @@ function App(props) {
   return (
     <BrowserRouter>
       <div className="wrapper">
-        <Header/>
-        <Sidbar base={props.state.friends.friendsLink}/>
-        
+        <Header />
+        <Sidbar  />
+
         <div className="app-wrapper-window">
-          <Route path="/profile" render={() => <Profile 
-            store={props.store}
-          />} />
-          
-          <Route path="/dialog" render={() => <DialogContainer
-            store={props.store} 
-          />} />
-          
-          <Route path="/works" render={() => <Works base={props.state.workComponent}/>}/> 
+            <Route path="/profile" render={() => <Profile
+              
+            />} />
+
+            <Route path="/dialog" render={() => <DialogContainer
+              
+            />} />
+
+            <Route path="/works" render={() => <Works
+               />} />
         </div>
       </div>
     </BrowserRouter>

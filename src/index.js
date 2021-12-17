@@ -4,14 +4,16 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import StoreContext from "./context";
 
 
-export const renderDom = (state )=> ReactDOM.render(
+export const renderDom = (state) => ReactDOM.render(
   <React.StrictMode>
-    <App state={state} 
-        store={store}
-      dispatch={store.dispatch.bind(store)}
-    />
+    <StoreContext.Provider value={store}>
+      <App />
+    </StoreContext.Provider>
+
+
   </React.StrictMode>
   ,
   document.getElementById('root')
@@ -21,7 +23,7 @@ export const renderDom = (state )=> ReactDOM.render(
 renderDom(store.getState());
 
 
-store.subscribe(()=> {
+store.subscribe(() => {
   renderDom(store.getState())
 });
 
