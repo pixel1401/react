@@ -2,30 +2,25 @@
 import { Route } from "react-router";
 import './App.css';
 import Header from './component/header/header';
-import Sidbar from './component/nav/nav';
-import Works from './component/work/work';
-import Profile from "./component/profile/profile.jsx";
 import { BrowserRouter } from 'react-router-dom';
 import DialogContainer from "./component/dialog/Dialog-container";
+import Profile from "./component/profile/profile-container"
+import WorksContainer from "./component/work/work-container";
+import SidebarContainer from "./component/sidebar/sidebar-container";
 
 function App(props) {
   return (
     <BrowserRouter>
       <div className="wrapper">
         <Header />
-        <Sidbar  />
+        <SidebarContainer  />
 
         <div className="app-wrapper-window">
-            <Route path="/profile" render={() => <Profile
-              
-            />} />
+            <Route path="/profile" render={() => <Profile/>} />
 
-            <Route path="/dialog" render={() => <DialogContainer
-              
-            />} />
+            <Route path="/dialog" render={() => <DialogContainer/>} />
 
-            <Route path="/works" render={() => <Works
-               />} />
+            <Route path="/works" render={() => <WorksContainer/>} />
         </div>
       </div>
     </BrowserRouter>

@@ -4,15 +4,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import StoreContext from "./context";
+import { Provider } from "react-redux";
 
 
-export const renderDom = (state) => ReactDOM.render(
+export const renderDom = () => ReactDOM.render(
   <React.StrictMode>
-    <StoreContext.Provider value={store}>
+    <Provider store={store}>
       <App />
-    </StoreContext.Provider>
-
+    </Provider>
 
   </React.StrictMode>
   ,
@@ -20,12 +19,9 @@ export const renderDom = (state) => ReactDOM.render(
 );
 
 
-renderDom(store.getState());
+renderDom();
 
 
-store.subscribe(() => {
-  renderDom(store.getState())
-});
 
 
 

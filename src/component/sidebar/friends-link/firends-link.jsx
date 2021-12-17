@@ -1,9 +1,9 @@
-import s from "../nav.module.css";
+import s from "../sidebar.module.css";
 import { NavLink } from "react-router-dom";
 
 
 const friendsLink = (props)=> {
-    let state = props.store.getState().friends.friendsLink;
+    let state = props.friendsLink;
 
 
     let itemLink = state.map((e,i)=> {
