@@ -31,25 +31,21 @@ const messageReducer = (state = defaultStore , action) => {
 
     switch(action.type) {
         case PRINT_MESSAGES:
-            state.change_text = action.text;
-            return state
+            return {
+                ...state,
+                change_text: action.text
+            }
 
         case ADD_MESSAGES:
-            let newMessage = {
-                who:"mine",
-                name:"Me",
-                text:state.change_text
-            };
-
-            state.messages.push(newMessage);
-            state.change_text = "";
-
-            return state
+            let changeText = state.change_text
+            return {
+                ...state,
+                messages: [...state.messages, { who: "mine", name: "Me", text: changeText ,}],
+                change_text: ''
+            }
 
         default:return state;
     };
-
-
 
 }
 

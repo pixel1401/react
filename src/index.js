@@ -7,7 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import { Provider } from "react-redux";
 
 
-export const renderDom = () => ReactDOM.render(
+ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <App />
@@ -19,7 +19,7 @@ export const renderDom = () => ReactDOM.render(
 );
 
 
-renderDom();
+
 
 
 
