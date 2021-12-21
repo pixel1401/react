@@ -1,0 +1,79 @@
+.users__box {
+  width: 100%;
+}
+
+.users__title {
+  font-size: 50px;
+  margin-bottom: 15px;
+}
+
+.users__item {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 15px;
+}
+
+.users__ava_box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.users__ava {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: grey;
+  margin-bottom: 8px;
+}
+
+.users__status {
+  width: 90px;
+  text-align: center;
+  font-size: 20px;
+  background-color: green;
+  color: #fff;
+}
+
+.users__info_box {
+  display: flex;
+  flex-wrap: wrap;
+  width: 400px;
+  border: 2px solid grey;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.users__info_item {
+  flex: 1 1 50%;
+  height: fit-content;
+}
+
+.users__info_item:nth-child(even) {
+  text-align: end;
+}
+
+.users__info_item:nth-child(3) {
+  align-self: flex-end;
+}
+
+.users__info_item:nth-child(4) {
+  align-self: flex-end;
+}
+
+.users__name {
+  font-size: 18px;
+  font-style: italic;
+}
+
+.users__btn {
+  display: block;
+  width: fit-content;
+  margin: 35px auto 0;
+  color: #fff;
+  background-color: green;
+  padding: 5px 15px;
+  font-size: 18px;
+}
+/*# sourceMappingURL=users.module.css.map */

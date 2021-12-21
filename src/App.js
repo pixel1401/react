@@ -7,6 +7,7 @@ import DialogContainer from "./component/dialog/Dialog-container";
 import Profile from "./component/profile/profile-container"
 import WorksContainer from "./component/work/work-container";
 import SidebarContainer from "./component/sidebar/sidebar-container";
+import UsersContainer from "./component/users/Users-container";
 
 function App(props) {
   return (
@@ -21,6 +22,7 @@ function App(props) {
             <Route path="/dialog" render={() => <DialogContainer/>} />
 
             <Route path="/works" render={() => <WorksContainer/>} />
+            <Route path="/users" render={()=> <UsersContainer/>}/>
         </div>
       </div>
     </BrowserRouter>

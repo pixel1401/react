@@ -14,7 +14,7 @@ const ProfileInfo = (props) => {
     }
 
 
-    let postElem = props.postsBase.map((p, i) => <Post key={i} name={p.name} likeCount={p.likeCount} text={p.text} />)
+    let postElem = props.postsBase.map((p, i) => <Post  key={i} name={p.name} likeCount={p.likeCount} text={p.text} />)
 
     return (
         <main className={s.content}>
