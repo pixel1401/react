@@ -28,6 +28,11 @@
   margin-bottom: 8px;
 }
 
+.users__ava img {
+  display: block;
+  width: 100%;
+}
+
 .users__status {
   width: 90px;
   text-align: center;
