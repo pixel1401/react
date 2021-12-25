@@ -8,6 +8,27 @@
         margin-bottom: 15px;
     }
 
+    &__db {
+        color: red;
+    }
+    &__count {
+        margin: 25px 0 ;
+        display: flex;
+        align-items: center;
+            & li {
+                display: block;
+                cursor: pointer;
+                margin: 0 10px;
+                font-size: 19px;
+            }
+            &_page {
+                font-weight: bold;
+                color: red;
+            }
+    }
+
+
+
     &__item {
         display: flex;
         justify-content: space-around;
