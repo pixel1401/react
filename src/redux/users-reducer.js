@@ -6,7 +6,7 @@ const TOTAL_COUNT = 'total-count';
 
 export const followAction = (value, id) => ({ type: FOLLOW, bool: value, id: id });
 export const setUsersAction = (usersArr) => ({ type: SET_USERS, usersArr });
-export const changePageAction = (numPage) => ({type:CHANGE_PAGE , curPage: numPage});
+export const changePageAction = (numPage, posCurPage) => ({ type: CHANGE_PAGE, curPage: numPage, posPage: posCurPage});
 export const totalCountAction = (num)=> ({type:TOTAL_COUNT , totalCount:num});
 
 // props.setUsersAction(
@@ -24,7 +24,8 @@ let userState = {
     usersPage: [],
     count:10,
     totalItems:55,
-    currentPage:1
+    currentPage:1,
+    posPage:1
 
 }
 
@@ -39,7 +40,7 @@ const usersReducer = (state = userState, action) => {
                     action.bool === true ? el.followed = false : el.followed = true;
                 }
 
-                userPageNewArr.push(el);
+                return userPageNewArr.push(el);
             });
 
             return {
@@ -56,7 +57,8 @@ const usersReducer = (state = userState, action) => {
         case CHANGE_PAGE :
             return {
                 ...state,
-                currentPage:action.curPage
+                currentPage:action.curPage,
+                posPage: action.posPage
             }
 
         case TOTAL_COUNT:
