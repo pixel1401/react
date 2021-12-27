@@ -39,8 +39,8 @@ class Users extends React.Component {
 
             }
 
-            // [1,2,3, ... ,last]
             if (positionCurPageOfArr <= (countPage - 4) && countPage !== positionCurPageOfArr) {
+                // [1,2,3, ... ,last]
                 if (curPage === 1) {
                     this.savePagesArr.length = 0
                     for (let i = 1; i <= 15; i++) {
@@ -66,8 +66,8 @@ class Users extends React.Component {
                 }
 
 
-                // [1,23,25 , ... ,last]
             } else if (positionCurPageOfArr > countPage - 4 &&  curPage < (totalCountPage - countPage - 2)) {
+                // [1,23,25 , ... ,last]
                 let pagesRight = countPage - 2 - 2;
                 let curPagesArr = [1, curPage - 1];
                 for (let i = curPage; i < (curPage + pagesRight); i++) {
@@ -80,8 +80,8 @@ class Users extends React.Component {
                 return printPagesLi(this.savePagesArr);
 
 
-                // [1,55,56,last(57)]
             } else if (positionCurPageOfArr === countPage) {
+                // [1,55,56,last(57)]
                 let curPagesArr = [1];
                 for (let i = totalCountPage - (countPage - 2); i <= totalCountPage; i++) {
                     curPagesArr.push(i);
@@ -92,8 +92,6 @@ class Users extends React.Component {
             } else {
                 return printPagesLi(this.savePagesArr, true);
             }
-
-
 
         }
 
@@ -109,7 +107,7 @@ class Users extends React.Component {
                             <div className={s.users__item} id={el.id}>
                                 <div className={s.users__ava_box}>
                                     <div className={s.users__ava}>
-                                        <img src={`${usersImg}`} alt="users" />
+                                        <img src={`${(el.photos.small !== null) ? el.photos.small : usersImg}`} alt="users" />
                                     </div>
                                     {el.followed === true
                                         ? <button data-followed={(true)} onClick={this.props.changeFollow} className={s.users__status}>followed</button>
@@ -117,8 +115,8 @@ class Users extends React.Component {
                                 </div>
                                 <div className={s.users__info_box}>
                                     <div className={`${s.users__name}  ${s.users__info_item}`}>{el.name}</div>
-                                    <div className={`${s.users__country} ${s.users__info_item}`}>el.country</div>
-                                    <div className={`${s.users__quote} ${s.users__info_item}`}>el.quote</div>
+                                    <div className={`${s.users__country} ${s.users__info_item}`}>{el.id}</div>
+                                    <div className={`${s.users__quote} ${s.users__info_item}`}>{el.status}</div>
                                     <div className={`${s.users__city} ${s.users__info_item}`}>el.city</div>
                                 </div>
                             </div>

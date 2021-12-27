@@ -2,12 +2,14 @@ const FOLLOW = "follow";
 const SET_USERS = "set-users";
 const CHANGE_PAGE = 'change-page';
 const TOTAL_COUNT = 'total-count';
+const TOGGLE_IS_FETCHING = 'toggle-is-fetching';
 
 
 export const followAction = (value, id) => ({ type: FOLLOW, bool: value, id: id });
 export const setUsersAction = (usersArr) => ({ type: SET_USERS, usersArr });
 export const changePageAction = (numPage, posCurPage) => ({ type: CHANGE_PAGE, curPage: numPage, posPage: posCurPage});
 export const totalCountAction = (num)=> ({type:TOTAL_COUNT , totalCount:num});
+export const IsFetchingAction = (bool) => ({type:TOGGLE_IS_FETCHING , value:bool})
 
 // props.setUsersAction(
         //     [
@@ -25,7 +27,8 @@ let userState = {
     count:10,
     totalItems:55,
     currentPage:1,
-    posPage:1
+    posPage:1,
+    isFetching:false
 
 }
 
@@ -65,6 +68,12 @@ const usersReducer = (state = userState, action) => {
             return {
                 ...state,
                 totalItems: action.totalCount
+            }
+
+        case TOGGLE_IS_FETCHING:
+            return {
+                ...state,
+                isFetching:action.value
             }
         default: return state;
 

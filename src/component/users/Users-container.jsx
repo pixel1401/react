@@ -1,17 +1,20 @@
 import { connect } from "react-redux";
 import React from "react";
 import s from "./users.module.css";
-import { changePageAction, followAction, setUsersAction, totalCountAction } from "../../redux/users-reducer";
+import { changePageAction, followAction, IsFetchingAction, setUsersAction, totalCountAction } from "../../redux/users-reducer";
 import Users from "./Users";
 import * as axios from "axios";
+import Preloader from "../preloader/preloader";
 
 
 class UserContainerAPI extends React.Component {
     componentDidMount() {
+        this.props.isFetching(true);
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.count}&page=${this.props.curPage}`)
             .then((res) => {
                 this.props.setUsersAction(res.data.items)
                 this.props.totalCount(res.data.totalCount)
+                this.props.isFetching(false)
             })
     }
 
@@ -25,11 +28,13 @@ class UserContainerAPI extends React.Component {
     }
 
     activePage = (e, pos) => {
+        this.props.isFetching(true)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.count}&page=${e}`).then((response) => {
             this.props.setUsersAction(response.data.items)
             this.props.totalCount(response.data.totalCount)
+            this.props.isFetching(false)
         })
-        
+
         let index = (pos !== undefined) ? +((pos.nativeEvent.path[0]).dataset.index) : 0;
         let posCurPage = index + 1;
         this.props.changePageAction(e, posCurPage);
@@ -39,15 +44,18 @@ class UserContainerAPI extends React.Component {
 
 
     render() {
-        return <Users
-            changeFollow={this.changeFollow}
-            activePage={this.activePage}
-            users = {this.props.users}
-            count={this.props.count}
-            totalItemsProps={this.props.totalItemsProps}
-            curPage={this.props.curPage}
-            positionCurPageOfArr= {this.props.positionCurPageOfArr}
-        />
+        return <>
+            {this.props.isFetchingProps ? <Preloader/> : null }
+            <Users
+                changeFollow={this.changeFollow}
+                activePage={this.activePage}
+                users={this.props.users}
+                count={this.props.count}
+                totalItemsProps={this.props.totalItemsProps}
+                curPage={this.props.curPage}
+                positionCurPageOfArr={this.props.positionCurPageOfArr}
+            />
+        </>
     }
 
 }
@@ -62,6 +70,7 @@ let mapToProps = (state) => {
         totalItemsProps: state.users.totalItems,
         curPage: state.users.currentPage,
         positionCurPageOfArr: state.users.posPage,
+        isFetchingProps: state.users.isFetching
 
     }
 }
@@ -70,8 +79,9 @@ let mapToDispatch = (dispatch) => {
     return {
         followAction: (value, id) => dispatch(followAction(value, id)),
         setUsersAction: (usersArr) => dispatch(setUsersAction(usersArr)),
-        changePageAction: (numPage , posPage) => dispatch(changePageAction(numPage , posPage)),
-        totalCount: (num) => dispatch(totalCountAction(num))
+        changePageAction: (numPage, posPage) => dispatch(changePageAction(numPage, posPage)),
+        totalCount: (num) => dispatch(totalCountAction(num)),
+        isFetching: (bool) => dispatch(IsFetchingAction(bool))
     }
 }
 
