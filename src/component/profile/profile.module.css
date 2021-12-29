@@ -4,6 +4,14 @@
   height: 100%;
 } */
 
+
+.content__preloader div {
+  width: 100%;
+}
+.content__preloader img {
+  height: auto;
+}
+
 .content__img {
   grid-column: 1/3;
   width: 100%;

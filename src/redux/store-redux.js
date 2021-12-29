@@ -1,5 +1,6 @@
 import {  combineReducers, createStore } from "redux";
 import friendsReducer from "./frends-reducer";
+import HeaderReducer from "./header-reducer";
 import messageReducer from "./message-reducer";
 import profileReducer from "./profile-reducer";
 import usersReducer from "./users-reducer";
@@ -11,9 +12,12 @@ let reducers = combineReducers({
     workComponent:worksReducer,
     friends:friendsReducer,
     users: usersReducer,
+    header:HeaderReducer
 }) 
 
 
 const store = createStore(reducers);
+
+window.store = store;
 
 export default store;

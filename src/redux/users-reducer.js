@@ -28,7 +28,8 @@ let userState = {
     totalItems:55,
     currentPage:1,
     posPage:1,
-    isFetching:false
+    isFetching:false,
+    arrPositionPage:[]
 
 }
 

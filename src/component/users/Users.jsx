@@ -3,10 +3,11 @@
 import React from "react";
 import s from "./users.module.css";
 import usersImg from '../../assets/img/UsersDefault.jpg'
+import { NavLink } from "react-router-dom";
 
 class Users extends React.Component {
 
-    savePagesArr = [];
+    savePagesArr = [];  
     ellipsis = (<li type='ellipsis'>...</li>);
     printPage = (el, i) => (<li data-index={i} onClick={(pos) => this.props.activePage(el, pos)} className={this.props.curPage === el ? s.users__count_page : "no"}>{el}</li>)
     
@@ -104,11 +105,11 @@ class Users extends React.Component {
                 <div className={s.users__box}>
                     {this.props.users.map((el) => {
                         return (
-                            <div className={s.users__item} id={el.id}>
+                            <div  className={s.users__item} id={el.id}>
                                 <div className={s.users__ava_box}>
-                                    <div className={s.users__ava}>
+                                    <NavLink to={`profile/${el.id}`} className={s.users__ava}>
                                         <img src={`${(el.photos.small !== null) ? el.photos.small : usersImg}`} alt="users" />
-                                    </div>
+                                    </NavLink>
                                     {el.followed === true
                                         ? <button data-followed={(true)} onClick={this.props.changeFollow} className={s.users__status}>followed</button>
                                         : <button data-followed={false} onClick={this.props.changeFollow} className={s.users__status}>Unfollow</button>}
