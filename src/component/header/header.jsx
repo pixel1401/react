@@ -20,7 +20,8 @@ const Header = (props) => {
         )
     }
 
-    let auth = (props.isAuth === true) ? Userauthorized() : UserUnauthorized();
+    
+    let auth = (props.isAuth) ? Userauthorized() : UserUnauthorized();
 
 
     return (

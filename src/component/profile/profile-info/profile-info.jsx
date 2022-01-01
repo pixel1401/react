@@ -16,15 +16,15 @@ const ProfileInfo = (props) => {
 
 
     // DEFAULT PHOTO
-    let defImgLarge = "https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+    let defImgLarge = "https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500";
+    let myImgSmall = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-HXBNEcPO8DOwEs0Zx7owwqcGvkv_s-9TJA&usqp=CAU";
+
 
     let postElem = props.postsBase.map((p, i) => <Post key={i} name={p.name} likeCount={p.likeCount} text={p.text} />)
 
-    let myImgSmall = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-HXBNEcPO8DOwEs0Zx7owwqcGvkv_s-9TJA&usqp=CAU";
     
     if (props.alienProfile !== null) {
         let alienUser = props.alienProfile;
-        console.log(alienUser.photos.large)
         return (
             <main className={s.content}>
                 <div className={s.content__profile}>
