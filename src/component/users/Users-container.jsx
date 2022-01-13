@@ -3,17 +3,14 @@ import React from "react";
 import s from "./users.module.css";
 import { arrPosPageAC, changePageAction, followAction, IsFetchingAction, setUsersAction, totalCountAction } from "../../redux/users-reducer";
 import Users from "./Users";
-import * as axios from "axios";
 import Preloader from "../preloader/preloader";
+import { getApi } from "../../api";
 
 
 class UserContainerAPI extends React.Component {
     componentDidMount() {
         this.props.isFetching(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.count}&page=${this.props.curPage}`, {
-            withCredentials: true
-
-        })
+        getApi.getPage(this.props.count , this.props.curPage)
             .then((res) => {
                 this.props.setUsersAction(res.data.items)
                 this.props.totalCount(res.data.totalCount)
@@ -31,9 +28,7 @@ class UserContainerAPI extends React.Component {
 
     activePage = (e, pos) => {
         this.props.isFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.count}&page=${e}`, {
-            withCredentials: true
-        }).then((response) => {
+        getApi.getActivePage(this.props.count , e).then((response) => {
             this.props.setUsersAction(response.data.items)
             this.props.totalCount(response.data.totalCount)
             this.props.isFetching(false)
@@ -66,11 +61,8 @@ let mapToProps = (state) => {
     return {
         users: state.users.usersPage,
         count: state.users.count,
-        // totalItemsProps: state.users.totalItems,
         curPage: state.users.currentPage,
-        // positionCurPageOfArr: state.users.posPage,
         isFetchingProps: state.users.isFetching,
-        // arrPosPage: state.users.arrPositionPage,
         totalNumOfPages: state.users.totalNumOfPages,
 
         arrPage: state.users.arrPage,

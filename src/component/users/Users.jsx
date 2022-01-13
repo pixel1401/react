@@ -4,7 +4,7 @@ import React from "react";
 import s from "./users.module.css";
 import usersImg from '../../assets/img/UsersDefault.jpg'
 import { NavLink } from "react-router-dom";
-import axios from "axios";
+import { getApi } from "../../api";
 
 let Users = (props) => {
 
@@ -61,27 +61,18 @@ let Users = (props) => {
                                 </NavLink>
                                 {el.followed === true
                                     ? <button data-followed={true} onClick={(e) => {
-                                        axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`, {
-                                            withCredentials: true,
-                                            headers: {
-                                                "api-key": "41314092-c939-4a26-82db-e9f706ec5db9"
-                                            }
-                                        }).then((res) => {
+                                        getApi.unfollow(el.id)
+                                        .then((res) => {
                                             if (res.data.resultCode === 0) {
                                                 props.changeFollow(e)
                                             }
                                         })
                                     }} className={s.users__status}>followed</button>
                                     : <button data-followed={false} onClick={(e) => {
-                                        axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`, {}, {
-                                            withCredentials: true,
-                                            headers: {
-                                                "api-key": "41314092-c939-4a26-82db-e9f706ec5db9"
-                                            }
-                                        })
-                                            .then((res) => {
-                                                if (res.data.resultCode === 0) props.changeFollow(e);
-                                            })
+                                    
+                                        getApi.follow(el.id)
+                                        .then((res) => {if (res.data.resultCode === 0) props.changeFollow(e); })
+                                    
                                     }} className={s.users__status}>Unfollow</button>}
                             </div>
                             <div className={s.users__info_box}>
