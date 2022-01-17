@@ -8,11 +8,11 @@ import { getApi } from "../../api";
 
 let Users = (props) => {
 
-    let ellipsis = (<li type='ellipsis'>...</li>);
-    let printPage = (el, i) => (<li data-index={i} onClick={(pos) => props.activePage(el, pos)} className={props.curPage === el ? s.users__count_page : "no"}>{el}</li>)
+    let ellipsis = (<div type='ellipsis'>...</div>);
+    let printPage = (el, i) => (<button data-index={i} disabled={props.isFetchingProps} onClick={(pos) => props.activePage(el, pos)} className={props.curPage === el ? s.users__count_page : "no"}>{el}</button>)
 
     let totalCountPage = props.totalNumOfPages;
-    let lastPage = (i) => (<li type='lastPage' data-index={i} onClick={(pos) => props.activePage(totalCountPage, pos)} className={props.curPage === totalCountPage ? s.users__count_page : 'no'}>{totalCountPage}</li>);
+    let lastPage = (i) => (<button type='lastPage' disabled={props.isFetchingProps} data-index={i} onClick={(pos) => props.activePage(totalCountPage, pos)} className={props.curPage === totalCountPage ? s.users__count_page : 'no'}>{totalCountPage}</button>);
 
 
 
@@ -48,9 +48,9 @@ let Users = (props) => {
     return (
         <section className={s.users}>
             <h2 className={s.users__title}>Users</h2>
-            <ul className={s.users__count}>
+            <div className={s.users__count}>
                 {printPagesLi(props.arrPage, props.isLastPage)}
-            </ul>
+            </div>
             <div className={s.users__box}>
                 {props.users.map((el) => {
                     return (
@@ -60,18 +60,26 @@ let Users = (props) => {
                                     <img src={`${(el.photos.small !== null) ? el.photos.small : usersImg}`} alt="users" />
                                 </NavLink>
                                 {el.followed === true
-                                    ? <button data-followed={true} onClick={(e) => {
+                                    ? <button disabled={props.progres} data-followed={true} onClick={(e) => {
+                                        props.isProgres(true);
                                         getApi.unfollow(el.id)
                                         .then((res) => {
                                             if (res.data.resultCode === 0) {
-                                                props.changeFollow(e)
+                                                props.changeFollow(e);
+                                                props.isProgres(false);
+
                                             }
                                         })
                                     }} className={s.users__status}>followed</button>
-                                    : <button data-followed={false} onClick={(e) => {
-                                    
+                                    : <button disabled={props.progres} data-followed={false} onClick={(e) => {
+                                        props.isProgres(true);
                                         getApi.follow(el.id)
-                                        .then((res) => {if (res.data.resultCode === 0) props.changeFollow(e); })
+                                        .then((res) => {
+                                            if (res.data.resultCode === 0)  {
+                                                props.changeFollow(e);
+                                                props.isProgres(false);
+                                            } 
+                                    })
                                     
                                     }} className={s.users__status}>Unfollow</button>}
                             </div>

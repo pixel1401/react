@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import React from "react";
 import s from "./users.module.css";
-import { arrPosPageAC, changePageAction, followAction, IsFetchingAction, setUsersAction, totalCountAction } from "../../redux/users-reducer";
+import { arrPosPageAC, changePageAction, followAction, IsFetchingAction, isProgres, setUsersAction, totalCountAction } from "../../redux/users-reducer";
 import Users from "./Users";
 import Preloader from "../preloader/preloader";
 import { getApi } from "../../api";
@@ -67,7 +67,9 @@ let mapToProps = (state) => {
 
         arrPage: state.users.arrPage,
         isLastPage: state.users.isLastPage,
-        countPages: state.users.countPages
+        countPages: state.users.countPages,
+
+        progres:state.users.progres
 
     }
 }
@@ -79,7 +81,9 @@ let mapToDispatch = (dispatch) => {
         changePageAction: (numPage, posPage) => dispatch(changePageAction(numPage, posPage)),
         totalCount: (num) => dispatch(totalCountAction(num)),
         isFetching: (bool) => dispatch(IsFetchingAction(bool)),
-        arrPosPageAC: (arr) => dispatch(arrPosPageAC(arr))
+        arrPosPageAC: (arr) => dispatch(arrPosPageAC(arr)),
+
+        isProgres: (bool)=> dispatch(isProgres(bool))
     }
 }
 

@@ -4,6 +4,7 @@ const CHANGE_PAGE = 'change-page';
 const TOTAL_COUNT = 'total-count';
 const TOGGLE_IS_FETCHING = 'toggle-is-fetching';
 const ARR_POS_PAGE = "arr-pos-page";
+const PROGRES = 'progres';
 
 
 export const followAction = (value, id) => ({ type: FOLLOW, bool: value, id: id });
@@ -12,7 +13,7 @@ export const changePageAction = (numPage) => ({ type: CHANGE_PAGE, curPage: numP
 export const totalCountAction = (num)=> ({type:TOTAL_COUNT , totalCount:num});
 export const IsFetchingAction = (bool) => ({type:TOGGLE_IS_FETCHING , value:bool})
 export const arrPosPageAC = (arr) => ({type:ARR_POS_PAGE , pos:arr});
-
+export const isProgres = (bool) =>({type:PROGRES , value:bool});
 // props.setUsersAction(
         //     [
         //         { id: 1, name: "Erzhan", country: 'Kazakhstan', city: "Astana", quote: "It's my life", status: "Follow" },
@@ -33,7 +34,9 @@ let userState = {
     arrPage:[],
     totalNumOfPages:null,
     isLastPage:false,
-    countPages:15
+    countPages:15,
+
+    progres:false
 }
 
 
@@ -134,6 +137,12 @@ const usersReducer = (state = userState, action) => {
             return {
                 ...state,
                 arrPositionPage:action.pos
+            }
+
+        case PROGRES:
+            return {
+                ...state,
+                progres:action.value
             }
         default: return state;
 
