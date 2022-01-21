@@ -1,3 +1,4 @@
+import { getApi } from "../api";
 
 const ADD_POST = "add-post";
 const UPDATE_NEW_TEXT_POST = "updateNewTextPost";
@@ -45,6 +46,14 @@ const profileReducer = (state = defaultStore, action) => {
         default: return state
     }
 
+}
+
+export const getAlienProfile = (userId)=> {
+    return (dispatch)=> {
+        getApi.alienProfile(userId).then((res) => {
+            dispatch(alienProfileAC(res.data))
+        })
+    }
 }
 
 export default profileReducer;

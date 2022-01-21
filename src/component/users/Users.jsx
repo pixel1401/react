@@ -1,18 +1,18 @@
 // My ID of API => 21461
+// 21876
 
 import React from "react";
 import s from "./users.module.css";
 import usersImg from '../../assets/img/UsersDefault.jpg'
 import { NavLink } from "react-router-dom";
-import { getApi } from "../../api";
 
 let Users = (props) => {
 
-    let ellipsis = (<div type='ellipsis'>...</div>);
-    let printPage = (el, i) => (<button data-index={i} disabled={props.isFetchingProps} onClick={(pos) => props.activePage(el, pos)} className={props.curPage === el ? s.users__count_page : "no"}>{el}</button>)
+    let ellipsis = (i) => (<div key={i} type='ellipsis'>...</div>);
+    let printPage = (el, i) => (<button data-index={i} key={i} disabled={props.isFetchingProps} onClick={(pos) => props.activePage(el, pos)} className={props.curPage === el ? s.users__count_page : "no"}>{el}</button>)
 
     let totalCountPage = props.totalNumOfPages;
-    let lastPage = (i) => (<button type='lastPage' disabled={props.isFetchingProps} data-index={i} onClick={(pos) => props.activePage(totalCountPage, pos)} className={props.curPage === totalCountPage ? s.users__count_page : 'no'}>{totalCountPage}</button>);
+    let lastPage = (i) => (<button type='lastPage' key={i} disabled={props.isFetchingProps} data-index={i} onClick={(pos) => props.activePage(totalCountPage, pos)} className={props.curPage === totalCountPage ? s.users__count_page : 'no'}>{totalCountPage}</button>);
 
 
 
@@ -30,7 +30,7 @@ let Users = (props) => {
             } else {
                 return arr.map((el, i) => {
                     if (i === arr.length - 2) {
-                        return (ellipsis)
+                        return (ellipsis(i))
                     } else if (arr.length - 1 === i) {
                         return (lastPage(i))
                     } else {
@@ -52,36 +52,18 @@ let Users = (props) => {
                 {printPagesLi(props.arrPage, props.isLastPage)}
             </div>
             <div className={s.users__box}>
-                {props.users.map((el) => {
+                {props.users.map((el , i) => {
                     return (
-                        <div className={s.users__item} id={el.id}>
+                        <div className={s.users__item} key={i}  id={el.id}>
                             <div className={s.users__ava_box}>
                                 <NavLink to={`profile/${el.id}`} className={s.users__ava}>
                                     <img src={`${(el.photos.small !== null) ? el.photos.small : usersImg}`} alt="users" />
                                 </NavLink>
                                 {el.followed === true
                                     ? <button disabled={props.progres} data-followed={true} onClick={(e) => {
-                                        props.isProgres(true);
-                                        getApi.unfollow(el.id)
-                                        .then((res) => {
-                                            if (res.data.resultCode === 0) {
-                                                props.changeFollow(e);
-                                                props.isProgres(false);
-
-                                            }
-                                        })
+                                        props.changeFollowTh(el.id , false );
                                     }} className={s.users__status}>followed</button>
-                                    : <button disabled={props.progres} data-followed={false} onClick={(e) => {
-                                        props.isProgres(true);
-                                        getApi.follow(el.id)
-                                        .then((res) => {
-                                            if (res.data.resultCode === 0)  {
-                                                props.changeFollow(e);
-                                                props.isProgres(false);
-                                            } 
-                                    })
-                                    
-                                    }} className={s.users__status}>Unfollow</button>}
+                                    : <button disabled={props.progres} data-followed={false} onClick={(e) => {props.changeFollowTh(el.id, true );}} className={s.users__status}>Unfollow</button>}
                             </div>
                             <div className={s.users__info_box}>
                                 <div className={`${s.users__name}  ${s.users__info_item}`}>{el.name}</div>

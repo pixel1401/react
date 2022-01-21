@@ -1,3 +1,5 @@
+import { getApi } from "../api";
+
 const FOLLOW = "follow";
 const SET_USERS = "set-users";
 const CHANGE_PAGE = 'change-page';
@@ -97,7 +99,7 @@ const usersReducer = (state = userState, action) => {
             let userPageNewArr = [];
             state.usersPage.map((el) => {
                 if (el.id === +action.id) {
-                    action.bool === true ? el.followed = false : el.followed = true;
+                    action.bool === true ? el.followed = true : el.followed = false;
                 }
 
                 return userPageNewArr.push(el);
@@ -150,5 +152,41 @@ const usersReducer = (state = userState, action) => {
 
 
 }
+
+
+export const getUsers = (count , curPage) => {
+    return (dispatch) => {
+        dispatch(IsFetchingAction(true))
+        getApi.getPage(count, curPage)
+            .then((res) => {
+                dispatch(setUsersAction(res.data.items))
+                dispatch(totalCountAction(res.data.totalCount))
+                dispatch(IsFetchingAction(false))
+        })
+    }
+}
+
+
+
+export const changeFollowTh = (id , isFollow ) => {
+    return (dispatch)=> {
+        dispatch(isProgres(true));
+        function response () {
+                dispatch(followAction(isFollow, id));
+                dispatch(isProgres(false))
+            
+        }
+        if(isFollow) {
+            getApi.follow(id).then((res)=> {
+                response()
+            })
+        }else {
+            getApi.unfollow(id).then((res)=> {
+                response()
+            })
+        }
+    }
+}
+
 
 export default usersReducer;

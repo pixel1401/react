@@ -8,7 +8,7 @@ const friendsLink = (props)=> {
 
     let itemLink = state.map((e,i)=> {
         return (
-            <NavLink to={`/friends/${e.id}`} className={s.nav__friends_item} activeClassName={s.active}>
+            <NavLink key={i} to={`/friends/${e.id}`} className={s.nav__friends_item} activeClassName={s.active}>
                 <div className={s.nav__friends_ava}></div>
                 <div className={s.nav__friends_name}>{e.name}</div>
             </NavLink>

@@ -1,18 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Header from './header';
-import { setUserDataAC } from '../../redux/header-reducer'
-import axios from 'axios';
+import { getMeTh, setUserDataAC } from '../../redux/header-reducer'
 
 
 
 class HeaderContainerAPI extends React.Component {
     componentDidMount() {
-        axios.get("https://social-network.samuraijs.com/api/1.0/auth/me" , {withCredentials :true}).then((res) => {
-            if (res.data.resultCode === 0) {
-                this.props.setUserDataAC(res.data.data)
-            } 
-        })
+        this.props.getMeTh();
+        
     }
 
 
@@ -40,6 +36,6 @@ const mapProps = (state) => {
 }
 
 
-const HeaderContainer = connect(mapProps, { setUserDataAC })(HeaderContainerAPI)
+const HeaderContainer = connect(mapProps, { setUserDataAC, getMeTh })(HeaderContainerAPI)
 
 export default HeaderContainer;

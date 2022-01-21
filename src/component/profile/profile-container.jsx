@@ -1,10 +1,9 @@
 import React from "react";
-import axios from "axios";
 import { connect } from "react-redux";
-import { addPostActionCreator, alienProfileAC, updateText } from "../../redux/profile-reducer";
+import { addPostActionCreator, alienProfileAC, getAlienProfile, updateText } from "../../redux/profile-reducer";
 import ProfileInfo from "./profile-info/profile-info.jsx";
 import { withRouter } from "react-router-dom";
-
+import { AuthRedirect } from "../isAuthRedirect";
 
 
 class ProfileContainerAPI extends React.Component {
@@ -12,9 +11,7 @@ class ProfileContainerAPI extends React.Component {
     componentDidMount() {
         let userId = this.props.match.params.userId;
         if (userId !== undefined) {
-            axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`).then((res) => {
-                this.props.alienProfileAC(res.data)
-            })
+            this.props.getAlienProfile(userId);
         }else {
             this.props.alienProfileAC(null)
         }
@@ -50,9 +47,11 @@ const mapStateToProps = (state) => {
 // }
 
 
-const ProfileRoute = withRouter(ProfileContainerAPI)
+let WithAuthRedirect = AuthRedirect(ProfileContainerAPI);
+
+const ProfileRoute = withRouter(WithAuthRedirect)
 
 
-const Profile = connect(mapStateToProps, { addPostActionCreator, updateText, alienProfileAC })(ProfileRoute)
+const Profile = connect(mapStateToProps, { addPostActionCreator, updateText, alienProfileAC, getAlienProfile})(ProfileRoute)
 
 export default Profile;

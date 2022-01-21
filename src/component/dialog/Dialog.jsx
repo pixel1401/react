@@ -34,10 +34,10 @@ const Dialog = (props) => {
 
             <div className={s.dialog__window}>
                 {massegElem}
-                <from className={s.dialog__texterea}>
+                <div className={s.dialog__texterea}>
                     <textarea ref={text} onChange={changeText} value={props.change_text} placeholder="print your messages"></textarea>
-                    <button type="submit" onClick={send} aria-label="send">Send</button>
-                </from>
+                    <button  onClick={send} aria-label="send">Send</button>
+                </div>
             </div>
         </div>
     )

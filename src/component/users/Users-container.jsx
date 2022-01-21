@@ -1,30 +1,26 @@
 import { connect } from "react-redux";
 import React from "react";
-import s from "./users.module.css";
-import { arrPosPageAC, changePageAction, followAction, IsFetchingAction, isProgres, setUsersAction, totalCountAction } from "../../redux/users-reducer";
+// import s from "./users.module.css";
+import { arrPosPageAC, changeFollowTh, changePageAction, followAction, getUsers, IsFetchingAction, isProgres, setUsersAction, totalCountAction } from "../../redux/users-reducer";
 import Users from "./Users";
 import Preloader from "../preloader/preloader";
 import { getApi } from "../../api";
+import { AuthRedirect } from "../isAuthRedirect";
 
 
 class UserContainerAPI extends React.Component {
     componentDidMount() {
-        this.props.isFetching(true);
-        getApi.getPage(this.props.count , this.props.curPage)
-            .then((res) => {
-                this.props.setUsersAction(res.data.items)
-                this.props.totalCount(res.data.totalCount)
-                this.props.isFetching(false)
-            })
+        this.props.getUsers(this.props.count, this.props.curPage);
+        
     }
 
 
 
-    changeFollow = (e) => {
-        let value = e.target.dataset.followed === 'false' ? false : true;
-        let id = e.target.closest(`.${s.users__item}`).id;
-        this.props.followAction(value, id);
-    }
+    // changeFollow = (e) => {
+    //     let value = e.target.dataset.followed === 'false' ? false : true;
+    //     let id = e.target.closest(`.${s.users__item}`).id;
+    //     this.props.followAction(value, id);
+    // }
 
     activePage = (e, pos) => {
         this.props.isFetching(true)
@@ -43,11 +39,12 @@ class UserContainerAPI extends React.Component {
 
 
     render() {
+        // if(!this.props.isAuth) return <Redirect to={`/works`}/>
         return <>
             {this.props.isFetchingProps ? <Preloader /> : null}
             <Users {...this.props}
                 activePage={this.activePage}
-                changeFollow={this.changeFollow}
+                // changeFollow={this.changeFollow}
             />
         </>
     }
@@ -69,11 +66,12 @@ let mapToProps = (state) => {
         isLastPage: state.users.isLastPage,
         countPages: state.users.countPages,
 
-        progres:state.users.progres
+        progres:state.users.progres,
+
+        // isAuth:state.header.isAuth
 
     }
 }
-
 let mapToDispatch = (dispatch) => {
     return {
         followAction: (value, id) => dispatch(followAction(value, id)),
@@ -83,10 +81,17 @@ let mapToDispatch = (dispatch) => {
         isFetching: (bool) => dispatch(IsFetchingAction(bool)),
         arrPosPageAC: (arr) => dispatch(arrPosPageAC(arr)),
 
-        isProgres: (bool)=> dispatch(isProgres(bool))
+        isProgres: (bool)=> dispatch(isProgres(bool)),
+
+        getUsers: (count, curPage) => dispatch(getUsers(count, curPage)),
+        changeFollowTh: (id, isFollow) => dispatch(changeFollowTh(id, isFollow))
+        
     }
 }
 
-const UsersContainer = connect(mapToProps, mapToDispatch)(UserContainerAPI)
+let RedirectAuth = AuthRedirect(UserContainerAPI);
+
+
+const UsersContainer = connect(mapToProps, mapToDispatch)(RedirectAuth)
 
 export default UsersContainer;

@@ -1,3 +1,5 @@
+import { getApi } from "../api";
+
 const SET_USER_DATA = 'set-user-data';
  
 export const setUserDataAC = (userData)=> ({type:SET_USER_DATA , user:userData})
@@ -29,5 +31,14 @@ const HeaderReducer = (state = headerBase , action) => {
     
 }
 
+export const getMeTh = ()=> {
+    return (dispatch) => {
+        getApi.getMe().then((res) => {
+            if (res.data.resultCode === 0) {
+                dispatch(setUserDataAC(res.data.data));
+            }
+        })
+    }
+}
 
 export default HeaderReducer;

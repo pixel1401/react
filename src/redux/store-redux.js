@@ -1,4 +1,5 @@
-import {  combineReducers, createStore } from "redux";
+import {  applyMiddleware, combineReducers, createStore } from "redux";
+import thunk from "redux-thunk";
 import friendsReducer from "./frends-reducer";
 import HeaderReducer from "./header-reducer";
 import messageReducer from "./message-reducer";
@@ -14,9 +15,7 @@ let reducers = combineReducers({
     users: usersReducer,
     header:HeaderReducer
 }) 
-
-
-const store = createStore(reducers);
+const store = createStore(reducers, applyMiddleware(thunk));
 
 window.store = store;
 
