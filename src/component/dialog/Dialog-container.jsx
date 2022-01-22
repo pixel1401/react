@@ -1,5 +1,5 @@
-// import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
+import { compose } from "redux";
 import { addMessages, printMessages } from "../../redux/message-reducer";
 import { AuthRedirect } from "../isAuthRedirect";
 import Dialog from "./Dialog";
@@ -19,17 +19,12 @@ const mapPropsToState = (state) => {
 }
 
 
-// const mapDispatchToStore = (dispatch)=> {
-//     return{
-//         printMessages: (text) => dispatch(printMessages(text)),
-//         addMessages: () => dispatch(addMessages())
-//     }
-// }
 
-let WithAuthRedirect = AuthRedirect(Dialog);
+export default compose(
+    connect(mapPropsToState, { printMessages, addMessages }),
+    AuthRedirect
+)(Dialog);
 
 
-const DialogContainer = connect(mapPropsToState, { printMessages, addMessages })(WithAuthRedirect);
 
 
-export default DialogContainer;

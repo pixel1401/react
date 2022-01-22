@@ -9,10 +9,10 @@ import { NavLink } from "react-router-dom";
 let Users = (props) => {
 
     let ellipsis = (i) => (<div key={i} type='ellipsis'>...</div>);
-    let printPage = (el, i) => (<button data-index={i} key={i} disabled={props.isFetchingProps} onClick={(pos) => props.activePage(el, pos)} className={props.curPage === el ? s.users__count_page : "no"}>{el}</button>)
+    let printPage = (el, i) => (<button data-index={i} key={i} disabled={props.isFetchingProps} onClick={(pos) => props.changeActivePagination(el, pos)} className={props.curPage === el ? s.users__count_page : "no"}>{el}</button>)
 
     let totalCountPage = props.totalNumOfPages;
-    let lastPage = (i) => (<button type='lastPage' key={i} disabled={props.isFetchingProps} data-index={i} onClick={(pos) => props.activePage(totalCountPage, pos)} className={props.curPage === totalCountPage ? s.users__count_page : 'no'}>{totalCountPage}</button>);
+    let lastPage = (i) => (<button type='lastPage' key={i} disabled={props.isFetchingProps} data-index={i} onClick={(pos) => props.changeActivePagination(totalCountPage, pos)} className={props.curPage === totalCountPage ? s.users__count_page : 'no'}>{totalCountPage}</button>);
 
 
 

@@ -4,7 +4,7 @@ import s from "../profile.module.css";
 import Preloader from "../../preloader/preloader";
 
 
-const ProfileInfo = (props) => {
+const Profile = (props) => {
     const newPost = React.createRef();
     let showText = (e) => {
         props.addPostActionCreator()
@@ -64,4 +64,4 @@ const ProfileInfo = (props) => {
 
 }
 
-export default ProfileInfo;
+export default Profile;
