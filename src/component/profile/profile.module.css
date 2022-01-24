@@ -77,4 +77,10 @@
   background-color: #68bd68;
   margin-top: 25px;
 }
+.content__profile_input {
+  border: 1px solid black;
+}
 
+.content__profile_status {
+  cursor: pointer;
+}

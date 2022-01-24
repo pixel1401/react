@@ -1,20 +1,21 @@
 import React from "react";
 import { connect } from "react-redux";
-import { addPostActionCreator, alienProfileAC, getAlienProfile, updateText } from "../../redux/profile-reducer";
+import { addPostActionCreator, profileAC, getProfile, updateText } from "../../redux/profile-reducer";
 import Profile from "./profile-info/Profile.jsx";
 import { withRouter } from "react-router-dom";
 import { AuthRedirect } from "../isAuthRedirect";
 import { compose } from "redux";
 
-
 class ProfileContainer extends React.Component {
 
     componentDidMount() {
         let userId = this.props.match.params.userId;
+        if(!userId)  userId = this.props.myId;
+        
         if (userId !== undefined) {
-            this.props.getAlienProfile(userId);
+            this.props.getProfile(userId);
         } else {
-            this.props.alienProfileAC(null)
+            this.props.profileAC(null);
         }
     }
 
@@ -34,7 +35,8 @@ const mapStateToProps = (state) => {
     return {
         postsBase: state.profileComponent.postsBase,
         newText: state.profileComponent.newText,
-        alienProfile: state.profileComponent.alienProfile
+        profile: state.profileComponent.profile,
+        myId: state.header.id
 
     }
 }
@@ -48,7 +50,7 @@ const mapStateToProps = (state) => {
 
 
 export default compose(
-    connect(mapStateToProps, { addPostActionCreator, updateText, alienProfileAC, getAlienProfile }),
+    connect(mapStateToProps, { addPostActionCreator, updateText, profileAC, getProfile }),
     withRouter,
     AuthRedirect
 )(ProfileContainer);

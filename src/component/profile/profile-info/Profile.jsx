@@ -1,10 +1,13 @@
-import React from "react";
+import React  from "react";
 import Post from "./post/post";
 import s from "../profile.module.css";
 import Preloader from "../../preloader/preloader";
+import ProfileStatus from "./Profile-status";
+
 
 
 const Profile = (props) => {
+    
     const newPost = React.createRef();
     let showText = (e) => {
         props.addPostActionCreator()
@@ -22,9 +25,11 @@ const Profile = (props) => {
 
     let postElem = props.postsBase.map((p, i) => <Post key={i} name={p.name} likeCount={p.likeCount} text={p.text} />)
 
+
+
     
-    if (props.alienProfile !== null) {
-        let alienUser = props.alienProfile;
+    if (props.profile !== null) {
+        let alienUser = props.profile;
         return (
             <main className={s.content}>
                 <div className={s.content__profile}>
@@ -37,10 +42,11 @@ const Profile = (props) => {
                     <div className={s.content__profile_info}>
                         <h3 className={`${s.content__profile_info}  ${s.content__profile_name}`} >{alienUser.fullName}</h3>
                         <div className={`${s.content__profile_info}  ${s.content__profile_born}`}>Date of Birth: 1 April </div>
-                        <div className={`${s.content__profile_info}  ${s.content__profile_city}`} >City: Aktobe</div>
                         <div className={`${s.content__profile_info}  ${s.content__profile_education}`}>{alienUser.lookingForAJobDescription}</div>
                         <div className={`${s.content__profile_info}  ${s.content__profile_education}`}>{alienUser.aboutMe}</div>
                         <div className={`${s.content__profile_info}  ${s.content__profile_site}`}>Web sity:https://fugicar1.ru</div>
+                        
+                        <ProfileStatus/>
                     </div>
                     <div className={s.content__post}>
                         <h3 className={s.content__post_title}>My post</h3>

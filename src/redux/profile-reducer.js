@@ -2,12 +2,12 @@ import { getApi } from "../api";
 
 const ADD_POST = "add-post";
 const UPDATE_NEW_TEXT_POST = "updateNewTextPost";
-const ALIEN_PROFILE = "alien-profile";
+const GET_PROFILE = "get-profile";
 
 export const addPostActionCreator = () => ({ type: ADD_POST });
 
 export const updateText = (text) => ({ type: UPDATE_NEW_TEXT_POST, text: text });
-export const alienProfileAC = (arr) => ({type:ALIEN_PROFILE , base:arr});
+export const profileAC = (arr) => ({type:GET_PROFILE , base:arr});
 
 
 let defaultStore = {
@@ -17,7 +17,7 @@ let defaultStore = {
         { name: "Kill", likeCount: "0", text: "It is fine" },
     ],
     newText: "",
-    alienProfile:null
+    profile:null
 }
 
 
@@ -38,22 +38,26 @@ const profileReducer = (state = defaultStore, action) => {
                 newText: action.text
             }
             
-        case ALIEN_PROFILE:
+        case GET_PROFILE:
             return {
                 ...state,
-                alienProfile:action.base
+                profile:action.base
             }
         default: return state
     }
 
 }
 
-export const getAlienProfile = (userId)=> {
+export const getProfile = (userId)=> {
     return (dispatch)=> {
         getApi.alienProfile(userId).then((res) => {
-            dispatch(alienProfileAC(res.data))
+            dispatch(profileAC(res.data))
         })
     }
 }
+
+
+
+
 
 export default profileReducer;
