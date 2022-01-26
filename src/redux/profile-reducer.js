@@ -3,11 +3,13 @@ import { getApi } from "../api";
 const ADD_POST = "add-post";
 const UPDATE_NEW_TEXT_POST = "updateNewTextPost";
 const GET_PROFILE = "get-profile";
+const GET_STATUS = "get-status";
 
 export const addPostActionCreator = () => ({ type: ADD_POST });
 
 export const updateText = (text) => ({ type: UPDATE_NEW_TEXT_POST, text: text });
 export const profileAC = (arr) => ({type:GET_PROFILE , base:arr});
+export const getStatus = (text) =>({type:GET_STATUS ,  userStatus: text});
 
 
 let defaultStore = {
@@ -17,7 +19,9 @@ let defaultStore = {
         { name: "Kill", likeCount: "0", text: "It is fine" },
     ],
     newText: "",
-    profile:null
+    profile:null,
+    userStatus:"",
+    myStatus:"",
 }
 
 
@@ -43,6 +47,14 @@ const profileReducer = (state = defaultStore, action) => {
                 ...state,
                 profile:action.base
             }
+
+        case GET_STATUS:
+            return {
+                ...state,
+                userStatus:action.userStatus
+                
+            }
+        
         default: return state
     }
 
@@ -53,9 +65,22 @@ export const getProfile = (userId)=> {
         getApi.alienProfile(userId).then((res) => {
             dispatch(profileAC(res.data))
         })
+        getApi.getStatus(userId).then((res)=> {
+            dispatch(getStatus(res.data))
+        })
     }
 }
 
+
+export const changeStatusTh = (text)=> {
+    return(dispatch) => {
+        getApi.putStatus(text).then((res)=> {
+            if (res.data.resultCode === 0) {
+                dispatch(getStatus(text))
+            }
+        })
+    }
+}
 
 
 

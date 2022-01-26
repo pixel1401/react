@@ -46,7 +46,7 @@ const Profile = (props) => {
                         <div className={`${s.content__profile_info}  ${s.content__profile_education}`}>{alienUser.aboutMe}</div>
                         <div className={`${s.content__profile_info}  ${s.content__profile_site}`}>Web sity:https://fugicar1.ru</div>
                         
-                        <ProfileStatus/>
+                        <ProfileStatus {...props} />
                     </div>
                     <div className={s.content__post}>
                         <h3 className={s.content__post_title}>My post</h3>

@@ -4,51 +4,69 @@ import s from '../profile.module.css';
 
 
 class ProfileStatus extends React.Component {
-    localState = {
+    state = {
         editMode: false,
-        title:''
+        title: this.props.userStatus,
     }
-    setStatusBlur  (event)  {
+    setStatus  (event)  {
         let value = event.target.value;
-        this.localState.title = value;
-        this.localState.editMode = true;
         // console.log(this.forceUpdate);
         this.setState({ 
-            title:value,
-            editMode:true
+            title:value
         })
         // this.forceUpdate()
     }
 
     changeStatus (event) {
-        this.localState.editMode = false;
+        this.state.editMode = true;
         this.setState({
-            editMode:false
+            editMode:true
         })
         // this.forceUpdate()
     }
 
+    blurInput(event) {
+        let value = this.state.title;
+        if(this.props.userStatus === value) {
+            return this.setState({
+                editMode:false
+            })
+        } 
+        this.setState({
+            editMode:false,
+        })
+        this.props.changeStatusTh(value);
+        
+    }
+
+    componentDidUpdate(prevProps , prevState) {
+        if(prevProps.userStatus !== this.props.userStatus) {
+            this.setState({
+                title:this.props.userStatus
+            })
+        }
+    }
 
     render() {
-        let editMode = this.localState.editMode;
-        let title  = this.localState.title;
+        // if(title !== null && title !== "") this.state.editMode = true;
         return (
-            <div>
-                {
-                    (!editMode || title === '') &&
-                    <input type="text" 
-                        defaultValue={title}
-                        onBlur={(e) => { this.setStatusBlur(e) }}
+            <div>            
+                {(!this.state.editMode ) ?(
+
+                    <div onClick={(e) => this.changeStatus(e)} 
+                            className={`${s.content__profile_info}  ${s.content__profile_status}`}>{this.props.userStatus}</div>
+                )
+                    :(<input type="text"
+                        autoFocus 
+                        value={this.state.title}
+                        onChange={(e) => { this.setStatus(e) }}
+                        onBlur={(e) => {this.blurInput(e)}}
                         placeholder="Print your status" 
                         className={`${s.content__profile_info}  ${s.content__profile_input}`}></input>
-                }
-                {
-                    (editMode) &&
-                    <div 
-                        onClick={(e) => this.changeStatus(e)} 
-                        className={`${s.content__profile_info}  ${s.content__profile_status}`}>{title}</div>
-                }
-            </div>
+                    )
+                    }
+                    
+            </div>  
         )
 
 

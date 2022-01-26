@@ -5,10 +5,11 @@ import DialogItem from "./dialogsName/dilogsName";
 import DialogWindow from "./messeges/messeges"
 
 
-
+ 
 
 // SEND HTML
 const Dialog = (props) => {
+
     const text = React.createRef();
 
     let changeText = ()=> {

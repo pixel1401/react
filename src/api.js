@@ -1,7 +1,7 @@
 import axios from "axios";
 
 
-const instanse = axios.create({
+const instance = axios.create({
     withCredentials: true,
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
     headers: {
@@ -12,26 +12,36 @@ const instanse = axios.create({
 
 export const getApi =   {
     getPage(count = 10 , curPage=1) {
-        return instanse.get(`users?count=${count}&page=${curPage}`)
+        return instance.get(`users?count=${count}&page=${curPage}`)
     },
 
     getActivePage (count , e) {
-        return instanse.get(`users?count=${count}&page=${e}`)
+        return instance.get(`users?count=${count}&page=${e}`)
     },
 
+    
     follow(id) {
-        return instanse.post(`follow/${id}`)
+        return instance.post(`follow/${id}`)
     },
     unfollow(id) {
-        return instanse.delete(`follow/${id}`)
+        return instance.delete(`follow/${id}`)
     },
 
+    
     getMe() {
-        return instanse.get(`auth/me`);
+        return instance.get(`auth/me`);
     },
 
+    
     alienProfile(userId) {
-        return instanse.get(`profile/${userId}`);
+        return instance.get(`profile/${userId}`);
+    },
+
+    getStatus(userId) {
+        return instance.get(`profile/status/${userId}`)
+    },
+    putStatus(text) {
+        return instance.put(`/profile/status` , {status:text});
     }
 
 }

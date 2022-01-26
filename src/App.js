@@ -8,6 +8,7 @@ import WorksContainer from "./component/work/work-container";
 import SidebarContainer from "./component/sidebar/sidebar-container";
 import UsersContainer from "./component/users/Users-container";
 import HeaderContainer from "./component/header/Header-container";
+import Login from "./component/login/Login";
 
 function App(props) {
   return (
@@ -23,6 +24,8 @@ function App(props) {
 
             <Route path="/works" render={() => <WorksContainer/>} />
             <Route path="/users" render={()=> <UsersContainer/>}/>
+
+            <Route path="/" render={()=> <Login/>}/>
         </div>
       </div>
     </BrowserRouter>
