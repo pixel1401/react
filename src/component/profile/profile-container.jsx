@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { addPostActionCreator, profileAC, getProfile, updateText, changeStatusTh } from "../../redux/profile-reducer";
+import { addPostThunk, profileAC, getProfile, changeStatusTh } from "../../redux/profile-reducer";
 import Profile from "./profile-info/Profile.jsx";
 import { withRouter } from "react-router-dom";
 import { AuthRedirect } from "../isAuthRedirect";
@@ -34,7 +34,6 @@ class ProfileContainer extends React.Component {
 const mapStateToProps = (state) => {
     return {
         postsBase: state.profileComponent.postsBase,
-        newText: state.profileComponent.newText,
         profile: state.profileComponent.profile,
         myId: state.header.id,
         userStatus: state.profileComponent.userStatus,
@@ -52,7 +51,7 @@ const mapStateToProps = (state) => {
 
 
 export default compose(
-    connect(mapStateToProps, { addPostActionCreator, updateText, profileAC, getProfile, changeStatusTh }),
+    connect(mapStateToProps, { addPostThunk,  profileAC, getProfile, changeStatusTh }),
     withRouter,
     AuthRedirect
 )(ProfileContainer);

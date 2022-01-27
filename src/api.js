@@ -20,6 +20,7 @@ export const getApi =   {
     },
 
     
+
     follow(id) {
         return instance.post(`follow/${id}`)
     },
@@ -32,16 +33,27 @@ export const getApi =   {
         return instance.get(`auth/me`);
     },
 
+
     
     alienProfile(userId) {
         return instance.get(`profile/${userId}`);
     },
-
     getStatus(userId) {
         return instance.get(`profile/status/${userId}`)
     },
     putStatus(text) {
         return instance.put(`/profile/status` , {status:text});
+    },
+
+
+
+    logIn(email, password, rememberMe, captcha) {
+        return instance.post(`/auth/login`, {
+            email: email,
+            password: password,
+            rememberMe: rememberMe,
+            captcha: captcha
+        });
     }
 
 }

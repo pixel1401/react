@@ -5,9 +5,9 @@ const UPDATE_NEW_TEXT_POST = "updateNewTextPost";
 const GET_PROFILE = "get-profile";
 const GET_STATUS = "get-status";
 
-export const addPostActionCreator = () => ({ type: ADD_POST });
+export const addPostActionCreator = (text) => ({ type: ADD_POST , text:text });
 
-export const updateText = (text) => ({ type: UPDATE_NEW_TEXT_POST, text: text });
+
 export const profileAC = (arr) => ({type:GET_PROFILE , base:arr});
 export const getStatus = (text) =>({type:GET_STATUS ,  userStatus: text});
 
@@ -18,7 +18,6 @@ let defaultStore = {
         { name: "Ana", likeCount: "25K", text: "It is a long established fact that a reader will be distracted by the readable content o" },
         { name: "Kill", likeCount: "0", text: "It is fine" },
     ],
-    newText: "",
     profile:null,
     userStatus:"",
     myStatus:"",
@@ -29,11 +28,10 @@ const profileReducer = (state = defaultStore, action) => {
 
     switch (action.type) {
         case ADD_POST:
-            let changeText = state.newText;
             return {
                 ...state,
-                postsBase: [...state.postsBase, { name: "Function", likeCount: 0, text: changeText }],
-                newText: ""
+                postsBase: [...state.postsBase, { name: "Function", likeCount: 0, text: action.text }],
+               
             }
 
         case UPDATE_NEW_TEXT_POST:
@@ -59,6 +57,16 @@ const profileReducer = (state = defaultStore, action) => {
     }
 
 }
+
+
+
+export const addPostThunk = (text)=> {
+    return (dispatch)=> {
+        dispatch(addPostActionCreator(text))
+    }
+}
+
+
 
 export const getProfile = (userId)=> {
     return (dispatch)=> {

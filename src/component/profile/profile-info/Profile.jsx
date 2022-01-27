@@ -3,19 +3,17 @@ import Post from "./post/post";
 import s from "../profile.module.css";
 import Preloader from "../../preloader/preloader";
 import ProfileStatus from "./Profile-status";
+import { Formik, useField } from "formik";
+import * as yup from "yup";
+
+
+
 
 
 
 const Profile = (props) => {
     
-    const newPost = React.createRef();
-    let showText = (e) => {
-        props.addPostActionCreator()
-    }
-    const postChange = (e) => {
-        let text = newPost.current.value;
-        props.updateText(text);
-    }
+    
 
 
     // DEFAULT PHOTO
@@ -26,6 +24,24 @@ const Profile = (props) => {
     let postElem = props.postsBase.map((p, i) => <Post key={i} name={p.name} likeCount={p.likeCount} text={p.text} />)
 
 
+    const MyTextArea = ({ label, ...props }) => {
+        // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
+        // which we can spread on <input> and alse replace ErrorMessage entirely.
+        const [field, meta] = useField(props);
+        return (
+            <>
+                <label htmlFor={props.id || props.name}>{label}</label>
+                <textarea className="text-area" {...field} {...props} />
+                {meta.touched && meta.error ? (
+                    <div className="error">{meta.error}</div>
+                ) : null}
+            </>
+        );
+    };
+
+    const validations = yup.object().shape({
+        textarea:yup.string().required("Обязательно")
+    })
 
     
     if (props.profile !== null) {
@@ -48,10 +64,29 @@ const Profile = (props) => {
                         
                         <ProfileStatus {...props} />
                     </div>
+
+
                     <div className={s.content__post}>
-                        <h3 className={s.content__post_title}>My post</h3>
-                        <textarea ref={newPost} onChange={postChange} value={props.newText} placeholder="your post" ></textarea>
-                        <button onClick={showText} type="submit">Send</button>
+                        <Formik
+                            initialValues={{textarea:""}}
+                            validateOnBlur
+                            onSubmit={(values , action)=> {
+                                props.addPostThunk(values.textarea);
+                                action.resetForm();
+                            }}
+                            validationSchema={validations}
+                        >
+                            {({ handleSubmit})=> (
+                                <>
+                                    <MyTextArea label={'My Post'} name="textarea" placeholder="Print your post"/>
+                                    <button type="submit" onClick={handleSubmit}>Send</button>
+                                </>
+                            )}
+
+
+                        </Formik>
+                        {/* <textarea ref={newPost} onChange={postChange} value={props.newText} placeholder="your post" ></textarea> */}
+                        {/* <button onClick={showText} type="submit">Send</button> */}
                     </div>
                 </div>
 

@@ -1,0 +1,17 @@
+.login {
+    &__form {
+        display: flex;
+        flex-direction: column;
+        border: 2px solid black;
+            & input {
+                display: block;
+                height: 50px;
+                padding-left: 20px;
+                border: 1px solid black;
+                color: red;
+            }
+    }
+    &__name {
+
+    }
+}
