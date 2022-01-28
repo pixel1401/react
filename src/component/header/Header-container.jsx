@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Header from './header';
 import { getMeTh, setUserDataAC } from '../../redux/header-reducer'
+import { logOutThunk } from '../../redux/login-reducer';
 
 
 
@@ -35,7 +36,6 @@ const mapProps = (state) => {
     }
 }
 
-
-const HeaderContainer = connect(mapProps, { setUserDataAC, getMeTh })(HeaderContainerAPI)
+const HeaderContainer = connect(mapProps, { setUserDataAC, getMeTh, logOutThunk })(HeaderContainerAPI)
 
 export default HeaderContainer;

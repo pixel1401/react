@@ -1,23 +1,21 @@
 import _default from "yup/lib/locale";
 import { getApi } from "../api";
+import { getMeTh, logOutAC } from "./header-reducer";
 
 
-const LOG_IN = "log-in";
+const IS_FETCHING = "isFetching";
 
-export const logInAC = (email , password , rememberMe , captcha)=>({
-    type:LOG_IN , 
-    email:email , 
-    password:password , 
-    rememberMe:rememberMe,
-    captcha:captcha
-});
+export const isFetchingAC = (bool , error)=>({type:IS_FETCHING , value:bool , error:error}); 
 
 
 const defaultState = {
     email:"",
     password:"",
     rememberMe:true,
-    captcha:0
+    captcha:0,
+
+    isFetching:false,
+    loginError:false
 };
 
 
@@ -25,17 +23,13 @@ const defaultState = {
 const LoginReducer = (state = defaultState , action)=> {
 
     switch (action.type) {
-        case LOG_IN: 
-        return {
-            ...state,
-            email: action.email,
-            password: action.password,
-            rememberMe: action.rememberMe,
-            captcha: action.captcha
-        }
-        
-        default : 
-        return state;
+        case IS_FETCHING: 
+            return {
+                ...state,
+                isFetching:action.value,
+                loginError:action.error
+            }
+        default : return state;
 
     }
 
@@ -43,11 +37,26 @@ const LoginReducer = (state = defaultState , action)=> {
 
 
 
-export const logInThunk = ({email, password, rememberMe, captcha = 10})=> {
+export const logInThunk = ({email, password, rememberMe= false, captcha=10 })=> {
     return(dispatch)=> {
         getApi.logIn(email, password, rememberMe, captcha).then(res=> {
             if (res.data.resultCode === 0) {
-                dispatch(logInAC(email, password, rememberMe, captcha))
+                dispatch(getMeTh())
+                dispatch(isFetchingAC(true, false))
+            }else {
+                dispatch(isFetchingAC(false , "Ошибка, неправильный логин или пароль"))
+            }
+        })
+    }
+}
+
+
+export const logOutThunk = ()=> {
+    return(dispatch)=> {
+        getApi.logOut().then(res=> {
+            if (res.data.resultCode === 0) {
+                dispatch(logOutAC())
+                dispatch(isFetchingAC(false, false))
             }
         })
     }

@@ -54,7 +54,14 @@ export const getApi =   {
             rememberMe: rememberMe,
             captcha: captcha
         });
-    }
+    },
+
+    logOut() {
+        return instance.delete("/auth/login")
+    },
+
+
+
 
 }
 

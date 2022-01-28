@@ -16,7 +16,7 @@ export const AuthRedirect = (Component) => {
     class withRedirect extends React.Component {
         render() {
             if (!this.props.isAuth && !this.props.isLoading) {
-                return <Redirect to='/works' />
+                return <Redirect to='/login' />
             } else if (!this.props.isAuth && this.props.isLoading) {
                 return <>
                     <Preloader />

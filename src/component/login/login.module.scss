@@ -1,17 +1,91 @@
+$color-blue: #1877f2;
+
 .login {
+    &__title {
+        display: block;
+        font-size: 35px;
+        margin-bottom: 20px;
+    }
     &__form {
+        width: fit-content;
+        margin: 0 auto;
         display: flex;
         flex-direction: column;
-        border: 2px solid black;
-            & input {
-                display: block;
-                height: 50px;
-                padding-left: 20px;
-                border: 1px solid black;
-                color: red;
+        font-size: 25px;
+        & input {
+            position: relative;
+            display: block;
+            max-width: 370px;
+            height: 50px;
+            font-size: 20px;
+            padding-left: 15px;
+            padding-right: 35px;
+            border: 1px solid rgba(black, 0.4);
+            border-radius: 7px;
+            margin: 5px 0 10px 0;
+            &:focus {
+                box-shadow: 0 0 0 0.2rem rgba($color-blue, 0.25);
+                border-color: $color-blue;
+                caret-color: $color-blue;
             }
-    }
-    &__name {
 
+            &[data-set-error="err"] {
+                box-shadow: 0 0 0 0.2rem rgba(red, 0.25);
+                border-color: rgba(red, 0.25);
+            }
+
+            &[type="checkbox"] {
+                position: static;
+                margin: 0;
+                &:focus {
+                    box-shadow: none;
+                    border-color: none;
+                }
+            }
+        }
+    }
+    &__label {
+        position: relative;
+        display: block;
+        &::after {
+            display: block;
+            position: absolute;
+            top: 40px;
+            right: 9px;
+            font-size: 23px;
+        }
+        &[data-set-error="err"]::after {
+            content: "\274C";
+            color: rgba(green, 0.95);
+            font-size: 15px;
+            top: 49px;
+        }
+
+        &[data-set-ok="ok"]::after {
+            content: "\2713";
+            color: rgba(green, 0.95);
+        }
+    }
+    &__err {
+        display: none;
+    }
+
+    &__name {
+    }
+
+    &__btn {
+        margin: 0 auto;
+        display: block;
+        width: fit-content;
+        background-color: $color-blue;
+        border: none;
+        border-radius: 6px;
+        font-size: 20px;
+        line-height: 48px;
+        padding: 0 35px;
+        &:active {
+            background-color: #29487d;
+            border-color: #29487d;
+        }
     }
 }

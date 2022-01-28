@@ -2,9 +2,20 @@ import { getApi } from "../api";
 
 const SET_USER_DATA = 'set-user-data';
 const LOADING = "loading";
- 
+const LOG_OUT = "log-out"; 
+// const LOG_IN = "log-in"; 
+
+
 export const setUserDataAC = (userData)=> ({type:SET_USER_DATA , user:userData})
 export const isLoading = (bool)=> ({type:LOADING , value:bool})
+export const logOutAC = ()=> ({type:LOG_OUT})
+// export const logInAC = (email, password, rememberMe, captcha)=>({
+//     type:LOG_IN , 
+//     email:email , 
+//     password:password , 
+//     rememberMe:rememberMe,
+//     captcha:captcha
+// })
 
 let headerBase = {
     id:null,
@@ -34,6 +45,16 @@ const HeaderReducer = (state = headerBase , action) => {
             return {
                 ...state,
                 isLoading:action.value
+            }
+
+        case LOG_OUT:
+            return {
+                ...state,
+                id: null,
+                login: null,
+                email: null,
+                isAuth: false,
+                isLoading: false
             }
         default : return state
     }

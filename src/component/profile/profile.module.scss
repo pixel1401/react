@@ -1,11 +1,13 @@
+
 /* .content {
   grid-area: c;
   height: 100%;
 } */
+
+
 .content__preloader div {
   width: 100%;
 }
-
 .content__preloader img {
   height: auto;
 }
@@ -26,6 +28,7 @@
   display: grid;
   grid-template-columns: 250px 1fr;
   grid-gap: 10px;
+
 }
 
 .content__profile_img {
@@ -74,7 +77,6 @@
   background-color: #68bd68;
   margin-top: 25px;
 }
-
 .content__profile_input {
   border: 1px solid black;
 }
@@ -82,4 +84,8 @@
 .content__profile_status {
   cursor: pointer;
 }
-/*# sourceMappingURL=profile.module.css.map */
+
+
+.profile {
+    
+}

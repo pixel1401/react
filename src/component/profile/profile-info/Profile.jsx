@@ -51,6 +51,7 @@ const Profile = (props) => {
                 <div className={s.content__profile}>
                     <div className={s.content__img}>
                         <img src={(alienUser.photos.large !== null) ? alienUser.photos.large : defImgLarge} alt="content-img"></img>
+                        <input type="file" name="file"  />
                     </div>
                     <div className={s.content__profile_img}>
                         <img src={(alienUser.photos.small !== null) ? alienUser.photos.small : myImgSmall} alt="img"></img>
@@ -85,8 +86,7 @@ const Profile = (props) => {
 
 
                         </Formik>
-                        {/* <textarea ref={newPost} onChange={postChange} value={props.newText} placeholder="your post" ></textarea> */}
-                        {/* <button onClick={showText} type="submit">Send</button> */}
+                        
                     </div>
                 </div>
 

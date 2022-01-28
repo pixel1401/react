@@ -2,7 +2,7 @@ import React from "react";
 import { compose } from "redux";
 import Login from "./Login";
 import { connect } from "react-redux";
-import { logInThunk } from "../../redux/login-reducer";
+import { logInThunk, logOutThunk } from "../../redux/login-reducer";
 
 class LoginContainer extends React.Component {
     render() {
@@ -15,10 +15,13 @@ class LoginContainer extends React.Component {
 let mapDispatchToProps = (state)=> {
     let login = state.login;
     return {
-        email: login.email,
-        password: login.password,
-        rememberMe: login.rememberMe,
-        captcha: login.captcha
+        isAuth:state.header.isAuth,
+        isFetching:state.login.isFetching,
+        loginError: state.login.loginError
+        // email: login.email,
+        // password: login.password,
+        // rememberMe: login.rememberMe,
+        // captcha: login.captcha
     }
 }
 

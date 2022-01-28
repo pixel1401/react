@@ -1,0 +1,87 @@
+.header {
+    grid-area: h;
+    background-color: #68bd68;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+
+    &__logo {
+        height: 50px;
+        flex: 1 1 auto;
+        & img {
+            height: 100%;
+            object-fit: contain;
+        }
+    }
+    &__ava {
+        display: flex;
+        margin-right: 15px;
+        align-items: center;
+    }
+    &__name {
+        text-transform: uppercase;
+        font-size: 15px;
+        font-weight: 600;
+    }
+    &__email {
+        font-weight: 500;
+        margin: 4px 0 2px 0;
+    }
+    &__id {
+        font-size: 12px;
+    }
+    &__img {
+        &_box {
+            width: 40px;height: 40px;
+            border-radius: 50%;
+            background-color: blue;
+            margin-right: 10px;
+        }
+    }
+
+
+    &__btn {
+        display: inline-block;
+        border-radius: 4px;
+        background-color: #f4511e;
+        border: none;
+        color: #ffffff;
+        text-align: center;
+        text-transform: uppercase;
+        font-size: 14px;
+        padding: 10px 20px;
+        width: fit-content;
+        transition: all 0.5s;
+        cursor: pointer;
+        margin: 5px;
+
+        & span {
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+            transition: 0.5s;
+        }
+
+        & span::after {
+            content: "\00bb";
+            position: absolute;
+            opacity: 0;
+            top: 0;
+            right: -15px;
+            transition: 0.5s;
+        }
+
+        &:hover span {
+            padding-right: 15px;
+        }
+
+        &:hover span:after {
+            opacity: 1;
+            right: 0;
+        }
+    }
+
+    
+
+}
