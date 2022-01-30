@@ -2,13 +2,14 @@ import React from "react";
 import { connect } from "react-redux";
 // import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
+import { isAuth, isLoading } from "../redux/selectors";
 import Preloader from "./preloader/preloader";
 
 
 let mapToProps = (state) => {
     return {
-        isAuth: state.header.isAuth,
-        isLoading: state.header.isLoading
+        isAuth: isAuth(state),
+        isLoading: isLoading(state)
     }
 }
 

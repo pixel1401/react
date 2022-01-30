@@ -1,11 +1,12 @@
 import { connect } from "react-redux";
+import { getWorks } from "../../redux/selectors";
 import Works from "./work";
 
 
 
 const mapPropsToState = (state)=> {
     return {
-        baseWork: state.workComponent.baseWork
+        baseWork: getWorks(state)
     }
 }
 

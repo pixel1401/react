@@ -5,6 +5,7 @@ import Profile from "./profile-info/Profile.jsx";
 import { withRouter } from "react-router-dom";
 import { AuthRedirect } from "../isAuthRedirect";
 import { compose } from "redux";
+import { getId, getMyStatus, getPosts, getStatus, getProfileSelect } from "../../redux/selectors";
 
 class ProfileContainer extends React.Component {
 
@@ -33,11 +34,11 @@ class ProfileContainer extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        postsBase: state.profileComponent.postsBase,
-        profile: state.profileComponent.profile,
-        myId: state.header.id,
-        userStatus: state.profileComponent.userStatus,
-        myStatus:state.profileComponent.myStatus
+        postsBase: getPosts(state),
+        profile: getProfileSelect(state),
+        myId: getId(state),
+        userStatus: getStatus(state),
+        myStatus:getMyStatus(state)
 
     }
 }

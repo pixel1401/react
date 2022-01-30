@@ -3,6 +3,7 @@ import { compose } from "redux";
 import Login from "./Login";
 import { connect } from "react-redux";
 import { logInThunk, logOutThunk } from "../../redux/login-reducer";
+import { isAuth, isFetching, showTextErrorLogin } from "../../redux/selectors";
 
 class LoginContainer extends React.Component {
     render() {
@@ -13,11 +14,10 @@ class LoginContainer extends React.Component {
 }
 
 let mapDispatchToProps = (state)=> {
-    let login = state.login;
     return {
-        isAuth:state.header.isAuth,
-        isFetching:state.login.isFetching,
-        loginError: state.login.loginError
+        isAuth:isAuth(state),
+        isFetching:isFetching(state),
+        loginError: showTextErrorLogin(state)
         // email: login.email,
         // password: login.password,
         // rememberMe: login.rememberMe,

@@ -5,6 +5,7 @@ import Users from "./Users";
 import Preloader from "../preloader/preloader";
 import { AuthRedirect } from "../isAuthRedirect";
 import { compose } from "redux";
+import { getArrPagnitations, getCountUsersFirstPage, getCurrentPage, getFirstPageCountPagnitations, getTotalPages, getUsersSelect, isFetching, isLastPagnitation, isProgress } from "../../redux/selectors";
 
 
 class UserContainer extends React.Component {
@@ -28,17 +29,17 @@ class UserContainer extends React.Component {
 
 let mapToProps = (state) => {
     return {
-        users: state.users.usersPage,
-        count: state.users.count,
-        curPage: state.users.currentPage,
-        isFetchingProps: state.users.isFetching,
-        totalNumOfPages: state.users.totalNumOfPages,
+        users: getUsersSelect(state),
+        countPages: getFirstPageCountPagnitations(state),
+        curPage: getCurrentPage(state),
+        isFetchingProps: isFetching(state),
+        totalNumOfPages: getTotalPages(state),
 
-        arrPage: state.users.arrPage,
-        isLastPage: state.users.isLastPage,
-        countPages: state.users.countPages,
+        arrPage: getArrPagnitations(state),
+        isLastPage: isLastPagnitation(state),
+        count: getCountUsersFirstPage(state),
 
-        progres:state.users.progres,
+        progres:isProgress(state),
 
         // isAuth:state.header.isAuth
 

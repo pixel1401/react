@@ -1,10 +1,11 @@
 import { connect } from "react-redux";
+import { getFriends } from "../../redux/selectors";
 import Sidbar from "./sidebar";
 
 
 const mapPropsToState = (state)=> {
     return {
-        friendsLink: state.friends.friendsLink
+        friendsLink: getFriends(state)
     }
 }
 

@@ -2,9 +2,9 @@
 import { Field, Formik, ErrorMessage, useField } from "formik";
 import * as yup from "yup";
 import React from "react";
-import s from "./Dialog.module.css";
+import s from "./Messages.module.css";
 import DialogItem from "./dialogsName/dilogsName";
-import DialogWindow from "./messeges/messeges"
+import DialogWindow from "./messeges/Messeges-window"
 
 
  

@@ -3,16 +3,11 @@ import { connect } from 'react-redux';
 import Header from './header';
 import { getMeTh, setUserDataAC } from '../../redux/header-reducer'
 import { logOutThunk } from '../../redux/login-reducer';
+import { getEmail, getId, getLogin, isAuth } from '../../redux/selectors';
 
 
 
 class HeaderContainerAPI extends React.Component {
-    componentDidMount() {
-        this.props.getMeTh();
-        
-    }
-
-
 
     render() {
         return (
@@ -27,12 +22,12 @@ class HeaderContainerAPI extends React.Component {
 
 // 
 const mapProps = (state) => {
-    let header = state.header;
+    // let header = state.header;
     return {
-        login: header.login,
-        id: header.id,
-        email: header.email,
-        isAuth: header.isAuth
+        login: getLogin(state),
+        id: getId(state),
+        email: getEmail(state),
+        isAuth: isAuth(state)
     }
 }
 

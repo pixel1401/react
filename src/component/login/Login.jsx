@@ -1,47 +1,49 @@
 import { Formik } from 'formik';
 import * as yup from "yup";
-import React  from "react";
+import React from "react";
 import s from "./login.module.css";
 import { Redirect } from 'react-router-dom';
+import Preloader from '../preloader/preloader';
 
 
 class FormLogin extends React.Component {
 
 
     constructor(props) {
-        console.log('constructor');
         super(props)
         this.state = {
             redirect: false,
-            disabled: this.props.isFetching
-        }
+            disabled: this.props.isFetching,
+
+        }   
     }
 
     redirectTo() {
-        console.log("redirectTo");
         this.setState({
-            disabled:true,
+            disabled: true,
             // redirect:true,
         })
     }
 
-   
 
-    
 
-     componentDidUpdate (props , state) {
-        if(state.disabled !== this.props.isFetching) {
-            return this.setState({disabled:props.isFetching})
-        }else if (state.redirect !== this.props.isAuth) {
-            return this.setState({redirect:this.props.isAuth})
-        }else {
+
+
+    componentDidUpdate(props, state) {
+        if (state.disabled !== this.props.isFetching) {
+            return this.setState({ disabled: props.isFetching })
+        } else if (state.redirect !== this.props.isAuth) {
+            return this.setState({ redirect: this.props.isAuth })
+        } else {
             return null;
         }
     }
 
-    
 
-    
+
+
+
+
 
     validationsSchema = yup.object().shape({
         email: yup.string().email('Введите верный email'),
@@ -52,24 +54,26 @@ class FormLogin extends React.Component {
 
     render() {
 
-
-
+        
         return (
             <div>
+
                 <Formik
                     initialValues={{ email: "", password: "", passwordConfirm: "", rememberMe: "" }}
                     validateOnBlur
-                    onSubmit={(values) => {
-                        if (this.props.isAuth) return ;
-                        this.props.logInThunk({ email: values.email, password: values.password, rememberMe: values.rememberMe });
+                    onSubmit={(values, submitProps) => {
+                        if (this.props.isAuth) return;
+                        // console.log(submitProps.setStatus)
+                        this.props.logInThunk(values);
                         this.redirectTo()
-                        
+
                     }}
                     validationSchema={this.validationsSchema}
                 >
+                    
                     {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isValid, dirty, }) => (
-                        <div className={s.login__form}>
 
+                        <div className={s.login__form}>
                             <label
                                 htmlFor={`email`}
                                 className={s.login__label}
@@ -139,12 +143,16 @@ class FormLogin extends React.Component {
 
                             <input type="checkbox" name="rememberMe" value={values.rememberMe} onChange={handleChange} onBlur={handleBlur} id="" />
 
-                            {(!this.state.disabled) 
-                                ? <button className={s.login__btn} type="submit" disabled={!isValid && !dirty} onClick={handleSubmit}>SEND</button> 
-                                : <button className={s.login__btn} disabled>Send</button> 
+                            {(!this.state.disabled)
+                                ? <button className={s.login__btn} type="submit" disabled={!isValid && !dirty} onClick={handleSubmit}>SEND</button>
+                                : (
+                                    <div>
+                                        <button className={s.login__btn} disabled>Send</button>
+                                        <Preloader/>
+                                    </div>
+                                ) 
                             }
-
-                            {(this.state.redirect) && <Redirect to={'/profile'}/>}
+                            {(this.state.redirect) && <Redirect to={'/profile'} />}
                         </div>
                     )}
 

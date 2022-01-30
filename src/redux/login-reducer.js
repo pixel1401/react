@@ -37,14 +37,17 @@ const LoginReducer = (state = defaultState , action)=> {
 
 
 
-export const logInThunk = ({email, password, rememberMe= false, captcha=10 })=> {
+export const logInThunk = (form , error)=> {
     return(dispatch)=> {
+        let { email, password, rememberMe= false, captcha=10 } = form;
         getApi.logIn(email, password, rememberMe, captcha).then(res=> {
             if (res.data.resultCode === 0) {
                 dispatch(getMeTh())
                 dispatch(isFetchingAC(true, false))
             }else {
                 dispatch(isFetchingAC(false , "Ошибка, неправильный логин или пароль"))
+                // error({ error: res.data.messages })
+
             }
         })
     }

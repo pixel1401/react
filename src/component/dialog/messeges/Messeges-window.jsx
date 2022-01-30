@@ -1,4 +1,4 @@
-import s from "./../Dialog.module.css";
+import s from "./../Messages.module.css";
 
 
 

@@ -1,8 +1,10 @@
 import { connect } from "react-redux";
 import { compose } from "redux";
-import { addMessagesThunk} from "../../redux/message-reducer";
+import { addMessagesThunk } from "../../redux/message-reducer";
+import { getDialog, getMessages } from "../../redux/selectors";
 import { AuthRedirect } from "../isAuthRedirect";
-import Dialog from "./Dialog";
+import Dialog from "./Messages";
+
 
 
 
@@ -10,10 +12,9 @@ import Dialog from "./Dialog";
 
 
 const mapPropsToState = (state) => {
-    let dialog_component = state.dialogComponent;
     return {
-        dialogs: dialog_component.dialogs,
-        messages: dialog_component.messages,
+        dialogs: getDialog(state) ,
+        messages: getMessages(state)
     }
 }
 
