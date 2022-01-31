@@ -1,5 +1,6 @@
 import {  applyMiddleware, combineReducers, createStore } from "redux";
 import thunk from "redux-thunk";
+import AppReducer from "./app-reducer";
 import friendsReducer from "./frends-reducer";
 import HeaderReducer from "./header-reducer";
 import LoginReducer from "./login-reducer";
@@ -15,7 +16,8 @@ let reducers = combineReducers({
     friends:friendsReducer,
     users: usersReducer,
     header:HeaderReducer,
-    login:LoginReducer
+    login:LoginReducer,
+    app:AppReducer
 }) 
 const store = createStore(reducers, applyMiddleware(thunk));
 

@@ -1,4 +1,5 @@
 import { getApi } from "../api";
+import { getFollowedUsers } from "./frends-reducer";
 
 const SET_USER_DATA = 'set-user-data';
 const LOADING = "loading";
@@ -60,12 +61,12 @@ const HeaderReducer = (state = headerBase , action) => {
     }
     
 }
-
 export const getMeTh = ()=> {
     return (dispatch) => {
         getApi.getMe().then((res) => {
             if (res.data.resultCode === 0) {
                 dispatch(setUserDataAC(res.data.data));
+                dispatch(getFollowedUsers())
             }
             dispatch(isLoading(false))
         })

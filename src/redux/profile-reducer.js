@@ -18,9 +18,10 @@ let defaultStore = {
         { name: "Ana", likeCount: "25K", text: "It is a long established fact that a reader will be distracted by the readable content o" },
         { name: "Kill", likeCount: "0", text: "It is fine" },
     ],
-    profile:null,
+    profile:false,
     userStatus:"",
     myStatus:"",
+    userId:false
 }
 
 

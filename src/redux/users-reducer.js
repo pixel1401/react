@@ -1,4 +1,5 @@
 import { getApi } from "../api";
+import { getFollowedUsers } from "./frends-reducer";
 
 const FOLLOW = "follow";
 const SET_USERS = "set-users";
@@ -16,16 +17,7 @@ export const totalCountAction = (num) => ({ type: TOTAL_COUNT, totalCount: num }
 export const IsFetchingAction = (bool) => ({ type: TOGGLE_IS_FETCHING, value: bool })
 export const arrPosPageAC = (arr) => ({ type: ARR_POS_PAGE, pos: arr });
 export const isProgres = (bool) => ({ type: PROGRES, value: bool });
-// props.setUsersAction(
-//     [
-//         { id: 1, name: "Erzhan", country: 'Kazakhstan', city: "Astana", quote: "It's my life", status: "Follow" },
-//         { id: 2, name: "Chan-long", country: 'China', city: "Pekin", quote: "lorem lorem lore", status: "Unfollow" },
-//         { id: 3, name: "Naruto", country: 'Japan', city: "Tokyo", quote: "It's my life aw dwad a", status: "Follow" },
-//         { id: 4, name: "Oleg-Mongol ))", country: 'Russia', city: "Moscow", quote: "I am from Russia", status: "Follow" },
-//         { id: 5, name: "Mike Jordan", country: 'USA', city: "Texas", quote: "I dont from Russia", status: "Follow" },
-//         { id: 6, name: "Dina", country: 'Russia', city: "Moscow", quote: "I am from Russia", status: "UnFollow" },
-//     ]
-// )
+
 
 let userState = {
     usersPage: [],
@@ -154,36 +146,21 @@ const usersReducer = (state = userState, action) => {
 }
 
 
-// Thunk который изменяет активную pagination   
-export const changeActivePagination = (numPagination , eventClick) => {
-    return (dispatch) => {
-        dispatch(IsFetchingAction(true))
-        getApi.getActivePage(usersReducer.count, numPagination).then((response) => {
-            dispatch(setUsersAction(response.data.items));
-            dispatch(totalCountAction(response.data.totalCount));
-            dispatch(IsFetchingAction(false));
-        })
-
-        if(eventClick) {
-            let index = (eventClick !== undefined) ? +((eventClick.nativeEvent.path[0]).dataset.index) : 0;
-            let posCurPage = index + 1;
-            dispatch(changePageAction(numPagination, posCurPage));
-        }
-    }
-
-}
-
 
 // Получаеть массив пользователей в количестве count    
 export const getUsers = (count, curPage) => {
     return (dispatch) => {
         dispatch(IsFetchingAction(true))
-        getApi.getPage(count, curPage)
+        getApi.getPage(usersReducer.count, curPage)
             .then((res) => {
                 dispatch(setUsersAction(res.data.items))
                 dispatch(totalCountAction(res.data.totalCount))
                 dispatch(IsFetchingAction(false))
+                
             })
+
+        dispatch(changePageAction(curPage));
+        dispatch(getFollowedUsers())
     }
 }
 
@@ -198,16 +175,19 @@ export const changeFollowTh = (id, isFollow) => {
             dispatch(isProgres(false))
         }
 
+        let promise = (isFollow) 
+        ? getApi.follow(id).then((res) => {
+                response()
+            })
+        : getApi.unfollow(id).then((res) => {
+                response()
+            })
 
-        if (isFollow) {
-            getApi.follow(id).then((res) => {
-                response()
-            })
-        } else {
-            getApi.unfollow(id).then((res) => {
-                response()
-            })
-        }
+
+        Promise.all([promise]).then((res)=> {
+            dispatch(getFollowedUsers())
+        })
+
     }
 }
 

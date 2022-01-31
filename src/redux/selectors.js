@@ -45,12 +45,13 @@ export const getStatus = (state) => {
 export const getMyStatus = (state) => {
     return state.profileComponent.myStatus;
 };
+export const getUserId = (state) => state.profileComponent.userId
 
 
 
 // Sidebar(NAV) 
 export const getFriends = (state)=> {
-    return state.friends.friendsLink;
+    return state.friends.followedUsers;
 }
 
 

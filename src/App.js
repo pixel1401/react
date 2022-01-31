@@ -14,11 +14,12 @@ import { render } from "@testing-library/react";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { getMeTh } from "./redux/header-reducer";
-
+import { initializeApp } from "./redux/app-reducer";
 class App extends React.Component {
 
   componentDidMount(props) {
-      this.props.getMeTh()
+      // this.props.getMeTh()
+    this.props.initializeApp()
   }
 
 
@@ -30,7 +31,7 @@ class App extends React.Component {
         <SidebarContainer  />
 
         <div className="app-wrapper-window">
-            <Route path="/profile/:userId?" render={() => <Profile/>} />
+            <Route path="/profile/:userId?/:followed?" render={() => <Profile/>} />
 
             <Route path="/dialog" render={() => <DialogContainer/>} />
 
@@ -53,5 +54,5 @@ let mapStateToProps = (state)=> {
 
 
 export default compose(
-  connect(mapStateToProps, { getMeTh} )  
+  connect(mapStateToProps, { getMeTh, initializeApp} )  
 )(App);

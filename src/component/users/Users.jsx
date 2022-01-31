@@ -8,11 +8,16 @@ import { NavLink } from "react-router-dom";
 
 let Users = (props) => {
 
+    let changePagnitations = (pageNum , elem) => {
+        return props.getUsers(null, pageNum)
+    }
+
+
     let ellipsis = (i) => (<div key={i} type='ellipsis'>...</div>);
-    let printPage = (el, i) => (<button data-index={i} key={i} disabled={props.isFetchingProps} onClick={(pos) => props.changeActivePagination(el, pos)} className={props.curPage === el ? s.users__count_page : "no"}>{el}</button>)
+    let printPage = (el, i) => (<button data-index={i} key={i} disabled={props.isFetchingProps} onClick={(pos) => changePagnitations(el ,pos)} className={props.curPage === el ? s.users__count_page : "no"}>{el}</button>)
 
     let totalCountPage = props.totalNumOfPages;
-    let lastPage = (i) => (<button type='lastPage' key={i} disabled={props.isFetchingProps} data-index={i} onClick={(pos) => props.changeActivePagination(totalCountPage, pos)} className={props.curPage === totalCountPage ? s.users__count_page : 'no'}>{totalCountPage}</button>);
+    let lastPage = (i) => (<button type='lastPage' key={i} disabled={props.isFetchingProps} data-index={i} onClick={(pos) => changePagnitations(totalCountPage, pos)} className={props.curPage === totalCountPage ? s.users__count_page : 'no'}>{totalCountPage}</button>);
 
 
 
@@ -56,7 +61,7 @@ let Users = (props) => {
                     return (
                         <div className={s.users__item} key={i}  id={el.id}>
                             <div className={s.users__ava_box}>
-                                <NavLink to={`profile/${el.id}`} className={s.users__ava}>
+                                <NavLink to={`profile/${el.id}/${el.followed}`} className={s.users__ava}>
                                     <img src={`${(el.photos.small !== null) ? el.photos.small : usersImg}`} alt="users" />
                                 </NavLink>
                                 {el.followed === true

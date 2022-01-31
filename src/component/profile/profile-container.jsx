@@ -5,31 +5,70 @@ import Profile from "./profile-info/Profile.jsx";
 import { withRouter } from "react-router-dom";
 import { AuthRedirect } from "../isAuthRedirect";
 import { compose } from "redux";
-import { getId, getMyStatus, getPosts, getStatus, getProfileSelect } from "../../redux/selectors";
+import { getId, getMyStatus, getPosts, getStatus, getProfileSelect, isProgress } from "../../redux/selectors";
+import { changeFollowTh } from "../../redux/users-reducer";
 
 class ProfileContainer extends React.Component {
 
-    componentDidMount() {
-        let userId = this.props.match.params.userId;
-        if(!userId)  userId = this.props.myId;
-        
-        if (userId !== undefined) {
-            this.props.getProfile(userId);
+
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            userId: ''
+        }
+    }
+
+    // сделал рефакторинг кода , вывод список подписанных людей 
+
+    getUserIdFromURL () {
+        if (!this.props.match.params.userId) {
+            this.state.userId = this.props.myId ;
+            this.setState({
+                userId: this.props.myId
+            })
+        }else {
+            this.state.userId = this.props.match.params.userId;
+            this.setState({
+                userId: this.props.match.params.userId
+            })
+        }
+
+        if (this.state.userId !== undefined) {
+            this.props.getProfile(this.state.userId);
         } else {
             this.props.profileAC(null);
         }
     }
 
 
+    componentDidMount() {
+        this.getUserIdFromURL()
+    }
+
+
+    
+    componentDidUpdate(props , state) {
+        if ((this.state.userId !== this.props.match.params.userId) && this.props.match.params.userId) {
+            this.getUserIdFromURL()
+        }else {
+            return null;
+        }
+    }
+
+
+
     render() {
 
         return (
-            <Profile {...this.props} />
+            <Profile {...this.props}
+                isFollow={this.props.match.params.followed}
+
+            />
         )
 
     }
 }
-
 
 
 const mapStateToProps = (state) => {
@@ -38,7 +77,9 @@ const mapStateToProps = (state) => {
         profile: getProfileSelect(state),
         myId: getId(state),
         userStatus: getStatus(state),
-        myStatus:getMyStatus(state)
+        myStatus: getMyStatus(state),
+
+        progres: isProgress(state)
 
     }
 }
@@ -51,8 +92,9 @@ const mapStateToProps = (state) => {
 // }
 
 
+
 export default compose(
-    connect(mapStateToProps, { addPostThunk,  profileAC, getProfile, changeStatusTh }),
+    connect(mapStateToProps, { addPostThunk, profileAC, getProfile, changeStatusTh, changeFollowTh }),
     withRouter,
     AuthRedirect
 )(ProfileContainer);

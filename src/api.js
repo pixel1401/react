@@ -11,9 +11,14 @@ const instance = axios.create({
 
 
 export const getApi =   {
-    getPage(count = 10 , curPage=1) {
+    getPage(count = 10, curPage = 1) {
         return instance.get(`users?count=${count}&page=${curPage}`)
     },
+
+    getFollowedUsers(count = 10, curPage = 1, term, friend) {
+        return instance.get(`users?count=${count}&page=${curPage}&term=${term}&friend=${friend}`)
+    },
+
 
     getActivePage (count , e) {
         return instance.get(`users?count=${count}&page=${e}`)

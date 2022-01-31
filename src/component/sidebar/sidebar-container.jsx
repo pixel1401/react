@@ -5,7 +5,7 @@ import Sidbar from "./sidebar";
 
 const mapPropsToState = (state)=> {
     return {
-        friendsLink: getFriends(state)
+        followedUsers: getFriends(state)
     }
 }
 

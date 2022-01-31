@@ -5,20 +5,20 @@
   flex-direction: column;
   padding: 30px 25px 0 25px;
   font-size: 30px;
-}
 
+}
 .nav__link {
   color: blue;
   cursor: pointer;
 }
-
 .nav__link.active {
-  color: red;
+  color: red ;
 }
 
 .nav__work {
   color: red;
 }
+
 
 .nav__friends_logos {
   margin-top: 20px;
@@ -27,7 +27,6 @@
   justify-content: space-between;
   flex-wrap: wrap;
 }
-
 .nav__friends_item {
   cursor: pointer;
   margin: 10px 5px;
@@ -36,35 +35,35 @@
   align-items: center;
   flex: 0 1 40%;
   width: 40%;
-}
+//   overflow: hidden;
 
+  
+}
 .nav__friends_ava {
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
-  background-color: chartreuse;
+  width: 35px; height: 35px;
+  border-radius: 50%;background-color: chartreuse;
   margin-bottom: 5px;
+    & img {
+        display: block;
+        width: 100%;
+        border-radius: 50%;
+    }
 }
-
-.nav__friends_ava img {
-  display: block;
-  width: 100%;
-  border-radius: 50%;
-}
-
 .nav__friends_name {
-  font-weight: 700;
+    font-weight: 700;
   font-size: 15px;
   text-align: center;
-  width: 100%;
+    width: 100%;
+
   overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+
 }
 
 .nav__friends_id {
   font-size: 12px;
   text-align: center;
 }
-/*# sourceMappingURL=sidebar.module.css.map */

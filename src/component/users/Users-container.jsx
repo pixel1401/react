@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import React from "react";
-import { arrPosPageAC, changeActivePagination, changeFollowTh, changePageAction, followAction, getUsers, IsFetchingAction, isProgres, setUsersAction, totalCountAction } from "../../redux/users-reducer";
+import { arrPosPageAC, changeFollowTh, changePageAction, followAction, getUsers, IsFetchingAction, isProgres, setUsersAction, totalCountAction } from "../../redux/users-reducer";
 import Users from "./Users";
 import Preloader from "../preloader/preloader";
 import { AuthRedirect } from "../isAuthRedirect";
@@ -58,7 +58,6 @@ let mapToDispatch = (dispatch) => {
 
         getUsers: (count, curPage) => dispatch(getUsers(count, curPage)),
         changeFollowTh: (id, isFollow) => dispatch(changeFollowTh(id, isFollow)),
-        changeActivePagination: (numPagination, eventClick) => dispatch(changeActivePagination(numPagination, eventClick))
         
         
     }
