@@ -5,6 +5,7 @@ import Preloader from "../../preloader/preloader";
 import ProfileStatus from "./Profile-status";
 import ProfileForm from "./Profile-from";
 import { render } from "@testing-library/react";
+import ProfileStatusHook from "./Profile-status-Hook";
 
 
 
@@ -53,7 +54,7 @@ class Profile extends React.Component {
 
     
     buttonFollow = (id, progress) => {
-        if (this.state.isFollow === "true" || this.state.isFollow) {
+        if (this.state.isFollow === "true" || this.state.isFollow === true) {
             return <button disabled={progress} data-followed={true} onClick={(e)=> this.buttonClickFollow(id, e)}
             className={s.users__status}>followed</button>
         } else {
@@ -85,7 +86,8 @@ class Profile extends React.Component {
                             <div className={`${s.content__profile_info}  ${s.content__profile_education}`}>{alienUser.aboutMe}</div>
                             <div className={`${s.content__profile_info}  ${s.content__profile_site}`}>Web sity:https://fugicar1.ru</div>
 
-                            <ProfileStatus {...this.props} />
+                            {/* <ProfileStatus {...this.props} /> */}
+                            <ProfileStatusHook {...this.props}/>
                         </div>
 
 

@@ -46,6 +46,7 @@ export const getMyStatus = (state) => {
     return state.profileComponent.myStatus;
 };
 export const getUserId = (state) => state.profileComponent.userId
+export const is_Profile_and_Status = (state) => state.profileComponent.isProfile
 
 
 

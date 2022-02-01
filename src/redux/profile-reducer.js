@@ -4,12 +4,14 @@ const ADD_POST = "add-post";
 const UPDATE_NEW_TEXT_POST = "updateNewTextPost";
 const GET_PROFILE = "get-profile";
 const GET_STATUS = "get-status";
+const SHOW_PROFILE = 'show-profile'
 
 export const addPostActionCreator = (text) => ({ type: ADD_POST , text:text });
 
 
 export const profileAC = (arr) => ({type:GET_PROFILE , base:arr});
 export const getStatus = (text) =>({type:GET_STATUS ,  userStatus: text});
+export const showProfile = (bool)=>({type:SHOW_PROFILE , value:bool});  
 
 
 let defaultStore = {
@@ -21,7 +23,9 @@ let defaultStore = {
     profile:false,
     userStatus:"",
     myStatus:"",
-    userId:false
+    userId:false,
+    
+    isProfile:false
 }
 
 
@@ -54,6 +58,13 @@ const profileReducer = (state = defaultStore, action) => {
                 
             }
         
+        case SHOW_PROFILE: 
+            return {
+                ...state,
+                isProfile:action.value
+            }
+
+
         default: return state
     }
 
@@ -71,11 +82,15 @@ export const addPostThunk = (text)=> {
 
 export const getProfile = (userId)=> {
     return (dispatch)=> {
-        getApi.alienProfile(userId).then((res) => {
+        let profile = getApi.alienProfile(userId).then((res) => {
             dispatch(profileAC(res.data))
         })
-        getApi.getStatus(userId).then((res)=> {
+        let status = getApi.getStatus(userId).then((res)=> {
             dispatch(getStatus(res.data))
+        })
+
+        Promise.all([profile , status]).then(res=> {
+            dispatch(showProfile(true))
         })
     }
 }

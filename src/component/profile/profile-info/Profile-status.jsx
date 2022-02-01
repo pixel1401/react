@@ -29,13 +29,15 @@ class ProfileStatus extends React.Component {
         let value = this.state.title;
         if(this.props.userStatus === value) {
             return this.setState({
-                editMode:false
+                editMode:true
             })
         } 
         this.setState({
             editMode:false,
         })
-        this.props.changeStatusTh(value);
+
+        console.log("SEND" , value);
+        // this.props.changeStatusTh(value);
         
     }
 

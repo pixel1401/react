@@ -82,4 +82,11 @@
 .content__profile_status {
   cursor: pointer;
 }
+
+.content__profile_status {
+  margin-top: 15px;
+  width: 100%;
+  padding: 15px 15px;
+  border: 1px solid blue;
+}
 /*# sourceMappingURL=profile.module.css.map */

@@ -36,8 +36,9 @@ let userState = {
 
 // PagesLi function
 
-
+// возвращает массив страниц пользователей  , количество пользователей на одну страницу countItems ,  
 function showPages(countItams = 10, pages = 15) {
+    // Общ количество страниц
     let totalNumOfPages = Math.ceil(this.totalItems / countItams);
     this.totalNumOfPages = totalNumOfPages;
 
@@ -51,7 +52,7 @@ function showPages(countItams = 10, pages = 15) {
         let c = this.currentPage + (pages - 3)
         return range(this.currentPage - 1, c > totalNumOfPages ? totalNumOfPages : c)
     }
-    let compareIndexNextPages = (indexCurrentPages === pages - 3 || indexCurrentPages === pages - 4) ? true : false;
+    let compareIndexNextPages = (indexCurrentPages === pages - 3 || indexCurrentPages === pages - 4 || indexCurrentPages === pages - 2) ? true : false;
 
     let prevShowPages = () => {
         let a = this.currentPage - (pages - 5)
@@ -68,7 +69,7 @@ function showPages(countItams = 10, pages = 15) {
 
     if (this.currentPage === 1) {
         return this.arrPage = range(1, pages);
-    } else if (indexCurrentPages < indexNextPage && indexCurrentPages !== -1 && this.currentPage < totalNumOfPages - 2) {
+    } else if (indexCurrentPages < indexNextPage && indexCurrentPages !== -1 && this.currentPage <= totalNumOfPages - 2) {
         if (this.currentPage !== 2 && indexCurrentPages === 1) {
             return this.arrPage = [1, ...prevShowPages()]
         } else {
@@ -121,7 +122,7 @@ const usersReducer = (state = userState, action) => {
             }
 
         case TOGGLE_IS_FETCHING:
-            showPages.bind(state)();
+            if(!action.value) showPages.bind(state)();
             return {
                 ...state,
                 isFetching: action.value
@@ -147,7 +148,7 @@ const usersReducer = (state = userState, action) => {
 
 
 
-// Получаеть массив пользователей в количестве count    
+// Получаеть массив пользователей в количестве count , и страницу curPage    
 export const getUsers = (count, curPage) => {
     return (dispatch) => {
         dispatch(IsFetchingAction(true))
