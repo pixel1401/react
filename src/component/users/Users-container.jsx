@@ -6,9 +6,10 @@ import Preloader from "../preloader/preloader";
 import { AuthRedirect } from "../isAuthRedirect";
 import { compose } from "redux";
 import { getArrPagnitations, getCountUsersFirstPage, getCurrentPage, getFirstPageCountPagnitations, getTotalPages, getUsersSelect, isFetchingUsers, isLastPagnitation, isProgress } from "../../redux/selectors";
+import { PureComponent } from "react";
 
 
-class UserContainer extends React.Component {
+class UserContainer extends PureComponent {
     componentDidMount() {
         this.props.getUsers(this.props.count, this.props.curPage);
         
@@ -16,7 +17,7 @@ class UserContainer extends React.Component {
 
     render() {
         return <>
-            {this.props.isFetchingProps ? <Preloader /> : null}
+            {this.props.isFetchingProps ? <Preloader /> : null} 
             <Users {...this.props}
             />
         </>

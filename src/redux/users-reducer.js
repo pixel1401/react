@@ -83,7 +83,7 @@ function showPages(countItams = 10, pages = 15) {
 }
 
 
-
+// рефакторинг кода User(pagnitation) , Profile-status(переписана на хуки )   
 
 const usersReducer = (state = userState, action) => {
 

@@ -5,9 +5,9 @@ import React from "react";
 import s from "./users.module.css";
 import usersImg from '../../assets/img/UsersDefault.jpg'
 import { NavLink } from "react-router-dom";
-
-let Users = (props) => {
-
+window.props = [];
+let Users = React.memo((props) => {
+    window.props.push(props);
     let changePagnitations = (pageNum , elem) => {
         return props.getUsers(null, pageNum)
     }
@@ -84,7 +84,7 @@ let Users = (props) => {
         </section>
     )
 
-}
+});
 
 
 export default Users;

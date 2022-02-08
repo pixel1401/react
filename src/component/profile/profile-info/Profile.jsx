@@ -6,13 +6,14 @@ import ProfileStatus from "./Profile-status";
 import ProfileForm from "./Profile-from";
 import { render } from "@testing-library/react";
 import ProfileStatusHook from "./Profile-status-Hook";
+import { PureComponent } from "react";
 
 
 
 
 
 
-class Profile extends React.Component {
+class Profile extends PureComponent {
 
     constructor(props) {
         super(props)

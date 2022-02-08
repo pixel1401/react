@@ -1,8 +1,8 @@
 const ADD_MESSAGES = "add-messages"
+const DEL_MESSAGES = 'del-messages';
 
-
-const addMessages = (text) => ({ type: ADD_MESSAGES, text: text });
-
+export const addMessages = (text) => ({ type: ADD_MESSAGES, text: text });
+export const delMessages = (id)=> ({type:DEL_MESSAGES , index:id});
 
 let defaultStore = {
     dialogs: [
@@ -32,6 +32,12 @@ const messageReducer = (state = defaultStore, action) => {
                 messages: [...state.messages, { who: "mine", name: "Me", text: action.text, }],
             }
 
+
+        case DEL_MESSAGES:
+            return {
+                ...state,
+                messages:state.messages.filter((e, i)=> i != action.index)
+            }
         default: return state;
     };
 
