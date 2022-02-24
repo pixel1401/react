@@ -9,7 +9,7 @@ import ProfileStatusHook from "./Profile-status-Hook";
 import { PureComponent } from "react";
 
 
-
+import defaulyAva from '../../../assets/img/UsersDefault.jpg';
 
 
 
@@ -78,7 +78,7 @@ class Profile extends PureComponent {
                         {(this.props.myId !== alienUser.userId && this.props.isFollow) && this.buttonFollow(alienUser.userId, this.props.progres)}
 
                         <div className={s.content__profile_img}>
-                            <img src={(alienUser.photos.small !== null) ? alienUser.photos.small : this.myImgSmall} alt="img"></img>
+                            <img src={(alienUser.photos.small !== null) ? alienUser.photos.small : defaulyAva} alt="img"></img>
                         </div>
                         <div className={s.content__profile_info}>
                             <h3 className={`${s.content__profile_info}  ${s.content__profile_name}`} >{alienUser.fullName}</h3>
@@ -87,8 +87,8 @@ class Profile extends PureComponent {
                             <div className={`${s.content__profile_info}  ${s.content__profile_education}`}>{alienUser.aboutMe}</div>
                             <div className={`${s.content__profile_info}  ${s.content__profile_site}`}>Web sity:https://fugicar1.ru</div>
 
-                            {/* <ProfileStatus {...this.props} /> */}
-                            <ProfileStatusHook {...this.props}/>
+                            <ProfileStatus {...this.props} />
+                            {/* <ProfileStatusHook {...this.props}/> */}
                         </div>
 
 

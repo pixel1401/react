@@ -3,6 +3,7 @@ import React from "react";
 import s from "./header.module.css"
 import { NavLink, Redirect } from "react-router-dom";
 
+import defaultImg from '../../assets/img/UsersDefault.jpg';
 
 class Header extends React.Component {
 
@@ -26,7 +27,7 @@ class Header extends React.Component {
             <>
                 <div className={s.header__ava}>
                     <div className={s.header__img_box}>
-                        <img src="#" alt="ava" />
+                        <img src={`${defaultImg}`}  alt="ava" />
                     </div>
                     <div className={s.header__ava_info}>
                         <div className={s.header__name}>{this.props.login}</div>

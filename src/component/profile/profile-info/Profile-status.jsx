@@ -37,7 +37,7 @@ class ProfileStatus extends React.Component {
         })
 
         console.log("SEND" , value);
-        // this.props.changeStatusTh(value);
+        this.props.changeStatusTh(value);
         
     }
 

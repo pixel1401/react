@@ -21,7 +21,7 @@ let defaultStore = {
         { name: "Kill", likeCount: "0", text: "It is fine" },
     ],
     profile:false,
-    userStatus:"",
+    userStatus:"It",
     myStatus:"",
     userId:false,
     
